@@ -6,8 +6,6 @@ let contentfulConfig = {
   environment: process.env.CONTENTFUL_ENVIRONMENT || 'master'
 };
 
-console.log(contentfulConfig);
-
 module.exports = {
   siteMetadata: {
     siteUrl: 'http://localhost:8000'
