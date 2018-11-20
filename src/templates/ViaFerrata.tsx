@@ -1,20 +1,26 @@
 import React from "react";
 import { graphql } from "gatsby";
+import { ContentfulViaFerrata } from "../contentful.types";
 
-export default class ViaFerrata extends React.Component<any> {
-
+interface ViaFerrataPageProps {
+  data: {
+    contentfulViaFerrata: ContentfulViaFerrata;
+  };
+}
+export default class ViaFerrata extends React.Component<ViaFerrataPageProps> {
   public render() {
-    console.log(this.props);
-    
-    return <div>{this.props.data.contentfulViaFerrata.name}</div>;
+    return (
+      <div>
+        <h1>{this.props.data.contentfulViaFerrata.name}</h1>
+      </div>
+    );
   }
 }
 
 export const query = graphql`
-query Pouet($slug: String!) {
-  contentfulViaFerrata(slug: { eq: $slug }) {
-    name
-    slug
+  query Pouet($slug: String!) {
+    contentfulViaFerrata(slug: { eq: $slug }) {
+      name
+    }
   }
-}
 `;
