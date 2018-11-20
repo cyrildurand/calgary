@@ -11,7 +11,6 @@ module.exports = {
     siteUrl: 'http://localhost:8000'
   },
   plugins: [
-    'gatsby-plugin-typescript',
     {
       resolve: 'gatsby-source-contentful',
       options: {
@@ -34,6 +33,12 @@ module.exports = {
         icon: 'src/images/favicon-512.png' // This path is relative to the root of the site.
       }
     },
-    'gatsby-plugin-react-helmet'
+    'gatsby-plugin-react-helmet',
+    {
+      resolve: `gatsby-plugin-typography`,
+      options: {
+        pathToConfigModule: `src/utils/typography.js`,
+      },
+    }
   ]
 };
