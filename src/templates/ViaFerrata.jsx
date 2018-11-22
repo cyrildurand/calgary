@@ -1,8 +1,7 @@
-import React from 'react';
 import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
-import SampleContent from '../components/SampleContent';
 import PropTypes from 'prop-types';
+import React from 'react';
 
 export const query = graphql`
   query ViaFerrata($slug: String!) {
@@ -20,7 +19,7 @@ export default class ViaFerrata extends React.Component {
     return (
       <Layout>
         <h1>{viaFerrata.name}</h1>
-        <SampleContent />
+        
       </Layout>
     );
   }

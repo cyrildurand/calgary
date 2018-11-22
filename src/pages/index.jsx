@@ -1,7 +1,7 @@
-import React from 'react';
-import ViaCard from '../components/ViaCard';
 import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
+import React from 'react';
+import ViaCard from '../components/ViaCard';
 
 export const query = graphql`
   query IndexQuery {
