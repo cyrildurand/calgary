@@ -19,9 +19,7 @@ export default class Layout extends React.Component {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
         </Helmet>
         <Header />
-        <section>
-          <div className="container">{children}</div>
-        </section>
+        <div className="container">{children}</div>
         <Footer />
       </>
     );
