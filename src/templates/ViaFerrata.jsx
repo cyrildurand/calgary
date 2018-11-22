@@ -1,19 +1,27 @@
-import React from "react";
-import { graphql } from "gatsby";
-
-const ViaFerrata = ({ data }) => {
-  return (
-    <div>
-      <h1>{data.contentfulViaFerrata.name}</h1>
-    </div>
-  );
-};
+import React from 'react';
+import { graphql } from 'gatsby';
+import Layout from '../components/Layout';
+import SampleContent from '../components/SampleContent';
+import PropTypes from 'prop-types';
 
 export const query = graphql`
-  query Pouet($slug: String!) {
+  query ViaFerrata($slug: String!) {
     contentfulViaFerrata(slug: { eq: $slug }) {
       name
     }
   }
 `;
-export default ViaFerrata;
+export default class ViaFerrata extends React.Component {
+  static propTypes = {
+    data: PropTypes.any.isRequired,
+  };
+  render() {
+    const viaFerrata = this.props.data.contentfulViaFerrata;
+    return (
+      <Layout>
+        <h1>{viaFerrata.name}</h1>
+        <SampleContent />
+      </Layout>
+    );
+  }
+}
