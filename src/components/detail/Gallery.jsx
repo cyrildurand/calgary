@@ -28,6 +28,27 @@ export default class Gallery extends React.Component {
   }
 
   componentDidMount() {
+    this.sortImages();
+  }
+
+  /**
+   * This component display images like this
+   *
+   * +-----+-----+
+   * |     |     |
+   * |     |     |
+   * |     |-----+
+   * +-----+     |
+   * |     |-----|
+   * |     |     |
+   * +-----+-----+
+   *
+   * This method will sort images to find best candidate based on aspect ratio and then compute
+   * width in percent to have both column the same height
+   *
+   * @remarks For now the method only works with 0 or 5+ images
+   */
+  sortImages() {
     var sortedImages = [];
     //make a copy of the array to provide a custom sort without altering the original collection
     var images = this.props.images.map((img, i) => {
@@ -129,62 +150,60 @@ export default class Gallery extends React.Component {
               imageCaption={sortedImages[photoIndex].description}
             />
           )}
-          <div className="container">
-            <div className={`${styles.gallery}`}>
-              <ul
-                className={`${styles.column1}`}
-                style={{
-                  flexBasis: `${this.state.percentage * 100}%`,
-                  maxWidth: `${this.state.percentage * 100}%`,
-                }}
-              >
-                <li>
-                  {this.renderImage({
-                    thumbnail: sortedImages[0].thumbnail,
-                    index: 0,
-                  })}
-                </li>
-                <li>
-                  {this.renderImage({
-                    thumbnail: sortedImages[1].thumbnail,
-                    index: 1,
-                  })}
-                </li>
-              </ul>
-              <ul
-                className={`${styles.column2}`}
-                style={{
-                  flexBasis: `${(1 - this.state.percentage) * 100}%`,
-                  maxWidth: `${(1 - this.state.percentage) * 100}%`,
-                }}
-              >
-                <li>
-                  {this.renderImage({
-                    thumbnail: sortedImages[2].thumbnail,
-                    index: 2,
-                  })}
-                </li>
-                <li>
-                  {this.renderImage({
-                    thumbnail: sortedImages[3].thumbnail,
-                    index: 3,
-                  })}
-                </li>
-                <li>
-                  {sortedImages.length > 5 && (
-                    <div className={styles.overlay}>
-                      <div>
-                        <p>+{sortedImages.length - 5}</p>
-                      </div>
+          <div className={`${styles.gallery}`}>
+            <ul
+              className={`${styles.column1}`}
+              style={{
+                flexBasis: `${this.state.percentage * 100}%`,
+                maxWidth: `${this.state.percentage * 100}%`,
+              }}
+            >
+              <li>
+                {this.renderImage({
+                  thumbnail: sortedImages[0].thumbnail,
+                  index: 0,
+                })}
+              </li>
+              <li>
+                {this.renderImage({
+                  thumbnail: sortedImages[1].thumbnail,
+                  index: 1,
+                })}
+              </li>
+            </ul>
+            <ul
+              className={`${styles.column2}`}
+              style={{
+                flexBasis: `${(1 - this.state.percentage) * 100}%`,
+                maxWidth: `${(1 - this.state.percentage) * 100}%`,
+              }}
+            >
+              <li>
+                {this.renderImage({
+                  thumbnail: sortedImages[2].thumbnail,
+                  index: 2,
+                })}
+              </li>
+              <li>
+                {this.renderImage({
+                  thumbnail: sortedImages[3].thumbnail,
+                  index: 3,
+                })}
+              </li>
+              <li>
+                {sortedImages.length > 5 && (
+                  <div className={styles.overlay}>
+                    <div>
+                      <p>+{sortedImages.length - 5}</p>
                     </div>
-                  )}
-                  {this.renderImage({
-                    thumbnail: sortedImages[4].thumbnail,
-                    index: 4,
-                  })}
-                </li>
-              </ul>
-            </div>
+                  </div>
+                )}
+                {this.renderImage({
+                  thumbnail: sortedImages[4].thumbnail,
+                  index: 4,
+                })}
+              </li>
+            </ul>
           </div>
         </>
       );
