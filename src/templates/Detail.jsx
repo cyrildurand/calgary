@@ -53,7 +53,7 @@ export default class Detail extends React.Component {
         <div className="row">
           <div className="col-md-8">
             <Section name={viaFerrata.name}>
-              <Description htmlDescription={viaFerrata.description.childMarkdownRemark.html} />
+              <Description htmlDescription={viaFerrata.description ? viaFerrata.description.childMarkdownRemark.html : undefined} />
             </Section>
             <Section name="Details">
               <AdditionalInformation />
