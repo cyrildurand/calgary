@@ -25,7 +25,7 @@ exports.createPages = ({
             posts.forEach((edge) => {
                 createPage({
                     path: `via-${edge.node.slug}/`,
-                    component: path.resolve('./src/templates/ViaFerrata.jsx'),
+                    component: path.resolve('./src/templates/Detail.jsx'),
                     context: {
                         slug: edge.node.slug,
                     },

@@ -18,6 +18,8 @@ var config = {
                 environment: contentfulConfig.environment
             }
         },
+        'gatsby-transformer-sharp',
+        'gatsby-plugin-sharp',
         'gatsby-plugin-react-helmet',
         {
             resolve: 'gatsby-transformer-remark',
