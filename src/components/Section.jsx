@@ -13,7 +13,7 @@ export default class Section extends React.Component {
     return (
       <section className={styles.sectionTopBorder}>
         <h3 className="d-flex mb-3">{name}</h3>
-        <div className="row mb-3">{children}</div>
+        <div className="mb-3">{children}</div>
       </section>
     );
   }

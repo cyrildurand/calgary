@@ -29,7 +29,7 @@ export default class Header extends React.Component {
               </li>
             </ul>
           </div>
-          <div className="row d-block">Copyright © 2000-2018 ViaFerrata-FR</div>
+          <div className="row d-block">Copyright © 2000-2018 Calgary</div>
         </div>
       </footer>
     );

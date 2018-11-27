@@ -1,7 +1,6 @@
 import { Link } from 'gatsby';
 import MenuItem from './MenuItem';
 import React from 'react';
-import images_logo from '../images/logo.png';
 import styles from './Header.module.scss';
 
 export default class Header extends React.Component {
@@ -89,7 +88,7 @@ export default class Header extends React.Component {
             <div className="row align-items-center justify-content-between d-flex">
               <div className={styles.logo}>
                 <Link to="/">
-                  <img src={images_logo} alt="" title="" />
+                  <div>Calgary</div>
                 </Link>
               </div>
               <nav className={styles.navMenuContainer}>
