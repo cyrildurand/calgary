@@ -5,29 +5,40 @@
     "start": "npm run develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "graphql-codegen": "gql-gen"
+    "deploy": "rimraf ./public/* && gatsby build && netlify deploy --dir=public --prod"
   },
   "dependencies": {
-    "@types/node": "^10.12.9",
-    "@types/react": "^16.7.6",
-    "@types/react-dom": "^16.0.9",
-    "gatsby": "^2.0.50",
-    "gatsby-plugin-manifest": "^2.0.9",
-    "gatsby-plugin-offline": "^2.0.15",
+    "bootstrap": "^4.1.3",
+    "dotenv": "^6.1.0",
+    "gatsby": "^2.0.54",
+    "gatsby-image": "^2.0.20",
+    "gatsby-plugin-manifest": "^2.0.10",
+    "gatsby-plugin-netlify": "^2.0.5",
+    "gatsby-plugin-no-sourcemaps": "^2.0.1",
+    "gatsby-plugin-offline": "^2.0.17",
     "gatsby-plugin-react-helmet": "^3.0.2",
+    "gatsby-plugin-sass": "^2.0.4",
+    "gatsby-plugin-sharp": "^2.0.13",
     "gatsby-plugin-sitemap": "^2.0.2",
-    "gatsby-plugin-typescript": "^2.0.1",
-    "gatsby-source-contentful": "^2.0.14",
+    "gatsby-remark-images-contentful": "^2.0.4",
+    "gatsby-source-contentful": "^2.0.15",
+    "gatsby-transformer-remark": "^2.1.12",
+    "gatsby-transformer-sharp": "^2.1.8",
+    "linearicons": "^1.0.1",
+    "node-sass": "^4.10.0",
+    "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
-    "react-helmet": "^5.2.0"
+    "react-google-maps": "^9.4.5",
+    "react-helmet": "^5.2.0",
+    "react-image-lightbox": "github:Resumane/react-image-lightbox#fix-umd-bug"
   },
   "devDependencies": {
-    "graphql-code-generator": "^0.14.1",
-    "graphql-codegen-typescript-common": "^0.14.1",
-    "graphql-codegen-typescript-server": "^0.14.1",
-    "tslint": "^5.11.0",
-    "tslint-react": "^3.6.0",
-    "typescript": "^3.1.6"
+    "eslint": "^5.9.0",
+    "eslint-config-gatsby-standard": "^2.1.0",
+    "eslint-plugin-react": "^7.11.1",
+    "eslint-plugin-sort-imports-es6-autofix": "^0.3.0",
+    "prettier": "^1.15.2",
+    "rimraf": "^2.6.2"
   }
 }
