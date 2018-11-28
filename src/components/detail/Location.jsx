@@ -32,7 +32,7 @@ export default class Location extends React.Component {
           <Helmet>
             <script type="application/ld+json">
               {JSON.stringify({
-                '@context': 'http://schema.org/name',
+                '@context': 'http://schema.org',
                 '@type': 'Place',
                 address: {
                   '@type': 'PostalAddress',
