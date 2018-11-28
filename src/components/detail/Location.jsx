@@ -42,8 +42,8 @@ export default class Location extends React.Component {
                 },
                 geo: {
                   '@type': 'GeoCoordinates',
-                  latitude: { latitude },
-                  longitude: { longitude },
+                  latitude: `${latitude}`,
+                  longitude: `${longitude}`,
                 },
               })}
             </script>
