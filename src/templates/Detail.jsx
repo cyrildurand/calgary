@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Section from '../components/Section';
 
-
 export const query = graphql`
   query Detail($slug: String!) {
     contentfulViaFerrata(slug: { eq: $slug }) {
@@ -53,14 +52,24 @@ export default class Detail extends React.Component {
         <div className="row">
           <div className="col-md-8">
             <Section name={viaFerrata.name}>
-              <Description htmlDescription={viaFerrata.description ? viaFerrata.description.childMarkdownRemark.html : undefined} />
+              <Description
+                htmlDescription={
+                  viaFerrata.description
+                    ? viaFerrata.description.childMarkdownRemark.html
+                    : undefined
+                }
+              />
             </Section>
             <Section name="Details">
               <AdditionalInformation />
             </Section>
             <Section name="Location">
               <Location
-                address="La ruelle 71960 Verzé"
+                address={{
+                  street: '345 clos du lapin blanc',
+                  city: 'Bonnaison',
+                  postalCode: '73430',
+                }}
                 latitude={viaFerrata.location.lat}
                 longitude={viaFerrata.location.lon}
                 accessDescription="Monter vers les Orres. Dans une grande épingle, prendre la route à droite vers le parking Riou Sec. Monter et prendre le sentier forestier. Au panneau suivre le sentier à droite qui traverse le vallon jusqu’à la via."

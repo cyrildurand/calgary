@@ -1,4 +1,5 @@
 import { GoogleMap, Marker, withGoogleMap, withScriptjs } from 'react-google-maps';
+import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
 import settings from '../../settings';
@@ -13,7 +14,11 @@ const MyMapComponent = withScriptjs(
 
 export default class Location extends React.Component {
   static propTypes = {
-    address: PropTypes.string.isRequired,
+    address: PropTypes.shape({
+      street: PropTypes.string,
+      postalCode: PropTypes.string.isRequired,
+      city: PropTypes.string.isRequired,
+    }).isRequired,
     accessDescription: PropTypes.string.isRequired,
     latitude: PropTypes.number.isRequired,
     longitude: PropTypes.number.isRequired,
@@ -24,12 +29,47 @@ export default class Location extends React.Component {
     return (
       <>
         <div>
+          <Helmet>
+            <script type="application/ld+json">
+              {JSON.stringify({
+                '@context': 'http://schema.org/name',
+                '@type': 'Place',
+                address: {
+                  '@type': 'PostalAddress',
+                  addressLocality: address.city,
+                  postalCode: address.postalCode,
+                  streetAddress: address.street,
+                },
+                geo: {
+                  '@type': 'GeoCoordinates',
+                  latitude: { latitude },
+                  longitude: { longitude },
+                },
+              })}
+            </script>
+          </Helmet>
           <h4>Addresse</h4>
-          <div>
-            <p>{address}</p>
-            <p>
-              Latitude: {latitude} Longitude: {longitude}
-            </p>
+          <div className="container">
+            <address className="row">
+              <p translate="no" className="col">
+                <span>{address.street}</span>
+                <br />
+                <span>{address.postalCode}</span>&nbsp;<span>{address.city}</span>
+              </p>
+              <p className="col">
+                Latitude: <span>{latitude}</span>
+                <br /> Longitude: <span>{longitude}</span>
+              </p>
+              <p>
+                <a
+                  href={`https://maps.google.com?saddr=Current+Location&daddr=${latitude},${longitude}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Go !
+                </a>
+              </p>
+            </address>
           </div>
         </div>
         <div>
