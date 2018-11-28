@@ -1,5 +1,4 @@
 import { GoogleMap, Marker, withGoogleMap, withScriptjs } from 'react-google-maps';
-import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
 import settings from '../../settings';
@@ -29,36 +28,17 @@ export default class Location extends React.Component {
     return (
       <>
         <div>
-          <Helmet>
-            <script type="application/ld+json">
-              {JSON.stringify({
-                '@context': 'http://schema.org',
-                '@type': 'Place',
-                address: {
-                  '@type': 'PostalAddress',
-                  addressLocality: address.city,
-                  postalCode: address.postalCode,
-                  streetAddress: address.street,
-                },
-                geo: {
-                  '@type': 'GeoCoordinates',
-                  latitude: `${latitude}`,
-                  longitude: `${longitude}`,
-                },
-              })}
-            </script>
-          </Helmet>
           <h4>Addresse</h4>
           <div className="container">
             <address className="row">
-              <p translate="no" className="col">
-                <span>{address.street}</span>
+              <p translate="no" className="col"  itemProp="address" itemScope itemType="http://schema.org/PostalAddress">
+                <span itemProp="streetAddress">{address.street}</span>
                 <br />
-                <span>{address.postalCode}</span>&nbsp;<span>{address.city}</span>
+                <span itemProp="postalCode">{address.postalCode}</span>&nbsp;<span itemProp="addressLocality">{address.city}</span>
               </p>
-              <p className="col">
-                Latitude: <span>{latitude}</span>
-                <br /> Longitude: <span>{longitude}</span>
+              <p className="col" itemProp="geo" itemScope itemType="http://schema.org/GeoCoordinates">
+                Latitude: <span itemProp="latitude">{latitude}</span>
+                <br /> Longitude: <span itemProp="longitude">{longitude}</span>
               </p>
               <p>
                 <a

@@ -11,11 +11,13 @@ export default class Description extends React.Component {
     return (
       <>
         {htmlDescription ? (
-          <p
-            dangerouslySetInnerHTML={{
-              __html: htmlDescription,
-            }}
-          />
+          <>
+            <p
+              dangerouslySetInnerHTML={{
+                __html: htmlDescription,
+              }}
+            />
+          </>
         ) : (
           <p>No description yet</p>
         )}

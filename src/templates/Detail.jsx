@@ -49,9 +49,9 @@ export default class Detail extends React.Component {
 
     return (
       <Layout>
-        <div className="row">
+        <div className="row" itemScope itemType="http://schema.org/Place">
           <div className="col-md-8">
-            <Section name={viaFerrata.name}>
+            <Section name={<span itemProp="name">{viaFerrata.name}</span>}>
               <Description
                 htmlDescription={
                   viaFerrata.description
