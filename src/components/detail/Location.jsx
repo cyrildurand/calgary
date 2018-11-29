@@ -31,12 +31,24 @@ export default class Location extends React.Component {
           <h4>Addresse</h4>
           <div className="container">
             <address className="row">
-              <p translate="no" className="col"  itemProp="address" itemScope itemType="http://schema.org/PostalAddress">
+              <p
+                translate="no"
+                className="col"
+                itemProp="address"
+                itemScope
+                itemType="http://schema.org/PostalAddress"
+              >
                 <span itemProp="streetAddress">{address.street}</span>
                 <br />
-                <span itemProp="postalCode">{address.postalCode}</span>&nbsp;<span itemProp="addressLocality">{address.city}</span>
+                <span itemProp="postalCode">{address.postalCode}</span>&nbsp;
+                <span itemProp="addressLocality">{address.city}</span>
               </p>
-              <p className="col" itemProp="geo" itemScope itemType="http://schema.org/GeoCoordinates">
+              <p
+                className="col"
+                itemProp="geo"
+                itemScope
+                itemType="http://schema.org/GeoCoordinates"
+              >
                 Latitude: <span itemProp="latitude">{latitude}</span>
                 <br /> Longitude: <span itemProp="longitude">{longitude}</span>
               </p>
@@ -63,7 +75,7 @@ export default class Location extends React.Component {
           <MyMapComponent
             isMarkerShown
             googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${
-              settings.GOOGLE_MAPS_API_AKY
+              settings.GOOGLE_MAPS_API_KEY
             }&v=3.exp&libraries=geometry,drawing,places`}
             loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: `400px` }} />}

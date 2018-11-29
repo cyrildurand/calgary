@@ -1,33 +1,46 @@
 import { Link } from 'gatsby';
 import Icon, { ICONS } from '../components/Icon';
+import PropTypes from 'prop-types';
 import React from 'react';
 import styles from './Header.module.scss';
+
+const menuItemPropTypes = {
+  onClick: PropTypes.func,
+  id: PropTypes.string,
+  text: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired,
+};
+menuItemPropTypes.menuItems = PropTypes.arrayOf(PropTypes.shape(menuItemPropTypes));
 
 export default class MenuItem extends React.Component {
   constructor() {
     super();
-    this.hasChildMenuItemClick = this.hasChildMenuItemClick.bind(this);
     this.state = {
       active: false,
     };
   }
 
+  static propTypes = menuItemPropTypes;
+
   hasChild() {
     return Array.isArray(this.props.menuItems) && this.props.menuItems.length > 0;
   }
-  hasChildMenuItemClick(e) {
-    e.preventDefault();
+  hasChildMenuItemClick() {
     this.setState(previousState => ({ active: !previousState.active }));
+    if (this.props.onClick && typeof (this.props.onClick == 'function')) {
+      this.props.onClick();
+    }
   }
   render() {
+    const { id, text, path, menuItems } = this.props;
     return (
       <li
         onMouseEnter={() => this.setState({ active: true })}
         onMouseLeave={() => this.setState({ active: false })}
         className={this.state.active ? styles.navActive : null}
       >
-        <Link to={`${this.props.path}#${this.props.id}`} onClick={this.hasChildMenuItemClick}>
-          {this.props.value}
+        <Link to={`${path}#${id}`} onClick={() => this.hasChildMenuItemClick()}>
+          {text}
           {this.hasChild() && (
             <Icon icon={this.state.active ? ICONS.CHEVRON_UP : ICONS.CHEVRON_DOWN} />
           )}
@@ -36,7 +49,7 @@ export default class MenuItem extends React.Component {
         {this.hasChild() && (
           <div>
             <ul>
-              {this.props.menuItems.map(menuItem => (
+              {menuItems.map(menuItem => (
                 <MenuItem key={menuItem.id} {...menuItem} />
               ))}
             </ul>

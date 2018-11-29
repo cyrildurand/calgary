@@ -6,30 +6,30 @@ import styles from './Header.module.scss';
 
 export default class Header extends React.Component {
   menuItems = [
-    { id: '0.A', value: 'Home', path: '/' },
-    { id: '0.B', value: 'About', path: '/' },
-    { id: '0.C', value: 'Packages', path: '/' },
+    { id: '0.A', text: 'Home', path: '/' },
+    { id: '0.B', text: 'About', path: '/' },
+    { id: '0.C', text: 'Packages', path: '/' },
     {
       id: '0.D',
-      value: 'Pages',
+      text: 'Pages',
       path: '/',
       menuItems: [
-        { id: '1.A', value: 'Level 1.A', path: '/' },
-        { id: '1.B', value: 'Level 1.B', path: '/' },
+        { id: '1.A', text: 'Level 1.A', path: '/' },
+        { id: '1.B', text: 'Level 1.B', path: '/' },
         {
           id: '1.C',
-          value: 'Level 1.C',
+          text: 'Level 1.C',
           path: '/',
           menuItems: [
-            { id: '2.A', value: 'Level 2.A', path: '/' },
-            { id: '2.B', value: 'Level 2.B', path: '/' },
-            { id: '2.C', value: 'Level 2.C', path: '/' },
+            { id: '2.A', text: 'Level 2.A', path: '/' },
+            { id: '2.B', text: 'Level 2.B', path: '/' },
+            { id: '2.C', text: 'Level 2.C', path: '/' },
           ],
         },
-        { id: '1.D', value: 'Level 1.D', path: '/' },
+        { id: '1.D', text: 'Level 1.D', path: '/' },
       ],
     },
-    { id: '0.E', value: 'Contact', path: '/' },
+    { id: '0.E', text: 'Contact', path: '/' },
   ];
 
   constructor() {
@@ -87,7 +87,11 @@ export default class Header extends React.Component {
               <nav className={styles.navMenuContainer}>
                 <ul>
                   {this.menuItems.map(menuItem => (
-                    <MenuItem key={menuItem.id} {...menuItem} />
+                    <MenuItem
+                      key={menuItem.id}
+                      onClick={() => this.setState({ mobileNavActive: false })}
+                      {...menuItem}
+                    />
                   ))}
                 </ul>
               </nav>
