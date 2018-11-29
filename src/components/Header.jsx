@@ -1,4 +1,5 @@
 import { Link } from 'gatsby';
+import Icon, { ICONS } from '../components/Icon';
 import MenuItem from './MenuItem';
 import React from 'react';
 import styles from './Header.module.scss';
@@ -78,19 +79,11 @@ export default class Header extends React.Component {
       >
         <div className={styles.banner}>
           <div className={`container ${styles.mainMenu}`}>
-            <button
-              type="button"
-              className={styles.mobileNavToggle}
-              onClick={() => this.mobileNavToggleClick()}
-            >
-              <i className={`lnr ${this.state.mobileNavActive ? 'lnr-cross' : 'lnr-menu'}`} />
-            </button>
-            <div className="row align-items-center justify-content-between d-flex">
-              <div className={styles.logo}>
-                <Link to="/">
-                  <div>Calgary</div>
-                </Link>
-              </div>
+            <div className="row align-items-center justify-content-between">
+              <Link to="/" className={styles.logo}>
+                <Icon icon={ICONS.LOGO} />
+                <span>Calgary</span>
+              </Link>
               <nav className={styles.navMenuContainer}>
                 <ul>
                   {this.menuItems.map(menuItem => (
@@ -98,6 +91,17 @@ export default class Header extends React.Component {
                   ))}
                 </ul>
               </nav>
+              <button
+                type="button"
+                className={styles.mobileNavToggle}
+                onClick={() => this.mobileNavToggleClick()}
+              >
+                {this.state.mobileNavActive ? (
+                  <Icon icon={ICONS.CLOSE} />
+                ) : (
+                  <Icon icon={ICONS.MENU} />
+                )}
+              </button>
             </div>
             <div
               className={styles.mobileBodyOverlay}

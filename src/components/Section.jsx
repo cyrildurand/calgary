@@ -4,7 +4,7 @@ import styles from './Section.module.scss';
 
 export default class Section extends React.Component {
   static propTypes = {
-    name: PropTypes.string.isRequired,
+    name: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
     children: PropTypes.node.isRequired,
   };
 
