@@ -29,7 +29,12 @@ export default class Icon extends React.Component {
         : { viewBox: icon.viewBox || '0 0 24 24', paths: icon.paths };
 
     return (
-      <svg width={`${width}px`} height={`${height}px`} viewBox={config.viewBox}>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width={`${width}px`}
+        height={`${height}px`}
+        viewBox={config.viewBox}
+      >
         {config.paths.map((path, i) => {
           return <path key={i} style={{ fill: color }} d={path} />;
         })}
@@ -66,5 +71,8 @@ export const ICONS = {
   MENU: 'M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z',
 
   // https://materialdesignicons.com/icon/magnify-plus-outline
-  MAGNIFY : 'M15.5,14L20.5,19L19,20.5L14,15.5V14.71L13.73,14.43C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.43,13.73L14.71,14H15.5M9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14M12,10H10V12H9V10H7V9H9V7H10V9H12V10Z' 
+  MAGNIFY : 'M15.5,14L20.5,19L19,20.5L14,15.5V14.71L13.73,14.43C12.59,15.41 11.11,16 9.5,16A6.5,6.5 0 0,1 3,9.5A6.5,6.5 0 0,1 9.5,3A6.5,6.5 0 0,1 16,9.5C16,11.11 15.41,12.59 14.43,13.73L14.71,14H15.5M9.5,14C12,14 14,12 14,9.5C14,7 12,5 9.5,5C7,5 5,7 5,9.5C5,12 7,14 9.5,14M12,10H10V12H9V10H7V9H9V7H10V9H12V10Z',
+
+  // https://materialdesignicons.com/icon/map-marker
+  MAP_MARKER : 'M12 11.5A2.5 2.5 0 0 1 9.5 9 2.5 2.5 0 0 1 12 6.5 2.5 2.5 0 0 1 14.5 9a2.5 2.5 0 0 1-2.5 2.5M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7z'
 };

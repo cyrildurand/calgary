@@ -1,15 +1,11 @@
-import { GoogleMap, Marker, withGoogleMap, withScriptjs } from 'react-google-maps';
+import '../../../node_modules/leaflet/dist/leaflet.css';
+import 'react-leaflet-fullscreen-control';
+import * as L from 'leaflet';
+import { LayersControl, Map, Marker, TileLayer } from 'react-leaflet';
+import Icon, { ICONS } from '../Icon';
 import PropTypes from 'prop-types';
 import React from 'react';
-import settings from '../../settings';
-
-const MyMapComponent = withScriptjs(
-  withGoogleMap(props => (
-    <GoogleMap defaultZoom={12} defaultCenter={{ lat: props.latitude, lng: props.longitude }}>
-      {props.isMarkerShown && <Marker position={{ lat: props.latitude, lng: props.longitude }} />}
-    </GoogleMap>
-  ))
-);
+import ReactDOMServer from 'react-dom/server';
 
 export default class Location extends React.Component {
   static propTypes = {
@@ -25,6 +21,8 @@ export default class Location extends React.Component {
 
   render() {
     const { address, accessDescription, latitude, longitude } = this.props;
+
+    const position = [latitude, longitude];
     return (
       <>
         <div>
@@ -72,17 +70,35 @@ export default class Location extends React.Component {
         </div>
 
         <div>
-          <MyMapComponent
-            isMarkerShown
-            googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${
-              settings.GOOGLE_MAPS_API_KEY
-            }&v=3.exp&libraries=geometry,drawing,places`}
-            loadingElement={<div style={{ height: `100%` }} />}
-            containerElement={<div style={{ height: `400px` }} />}
-            mapElement={<div style={{ height: `100%` }} />}
-            latitude={latitude}
-            longitude={longitude}
-          />
+          {typeof window !== 'undefined' && (
+            <>
+              <Map center={position} zoom={13} style={{ height: 400 }} fullscreenControl>
+                <LayersControl position="topright">
+                  <LayersControl.BaseLayer checked name="OpenTopoMap">
+                    <TileLayer url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png" />
+                  </LayersControl.BaseLayer>
+                  <LayersControl.BaseLayer name="OpenStreetMap">
+                    <TileLayer url="https://{s}.tile.osm.org/{z}/{x}/{y}.png" />
+                  </LayersControl.BaseLayer>
+                </LayersControl>
+                <Marker
+                  position={position}
+                  icon={
+                    new L.Icon({
+                      iconUrl:
+                        'data:image/svg+xml;base64,' +
+                        btoa(
+                          ReactDOMServer.renderToString(
+                            <Icon color="#F0F" icon={ICONS.MAP_MARKER} />
+                          )
+                        ),
+                      iconAnchor: [19, 19],
+                    })
+                  }
+                />
+              </Map>
+            </>
+          )}
         </div>
       </>
     );

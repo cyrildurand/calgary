@@ -1,15 +1,15 @@
 const path = require(`path`)
 
 exports.createPages = ({
-    graphql,
-    actions
+  graphql,
+  actions
 }) => {
-    const {
-        createPage
-    } = actions
+  const {
+    createPage
+  } = actions
 
-    const loadVias = new Promise((resolve, reject) => {
-        graphql(`
+  const loadVias = new Promise((resolve, reject) => {
+    graphql(`
         {
           allContentfulViaFerrata{
             edges {
@@ -20,21 +20,38 @@ exports.createPages = ({
           }
         }
       `).then(result => {
-            const posts = result.data.allContentfulViaFerrata.edges;
+      const posts = result.data.allContentfulViaFerrata.edges;
 
-            posts.forEach((edge) => {
-                createPage({
-                    path: `via-${edge.node.slug}/`,
-                    component: path.resolve('./src/templates/Detail.jsx'),
-                    context: {
-                        slug: edge.node.slug,
-                    },
-                })
-            });
-            resolve();
-        });
-
+      posts.forEach((edge) => {
+        createPage({
+          path: `via-${edge.node.slug}/`,
+          component: path.resolve('./src/templates/Detail.jsx'),
+          context: {
+            slug: edge.node.slug,
+          },
+        })
+      });
+      resolve();
     });
 
-    return Promise.all([loadVias]);
+  });
+
+  return Promise.all([loadVias]);
+}
+
+exports.onCreateWebpackConfig = ({
+  stage,
+  loaders,
+  actions
+}) => {
+  if (stage === "build-html") {
+    actions.setWebpackConfig({
+      module: {
+        rules: [{
+          test: /leaflet/,
+          use: loaders.null(),
+        }, ],
+      },
+    })
+  }
 }
