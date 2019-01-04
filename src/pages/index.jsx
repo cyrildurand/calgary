@@ -2,6 +2,7 @@ import { graphql } from 'gatsby';
 import Layout from '../components/Layout';
 import React from 'react';
 import ViaCard from '../components/ViaCard';
+import styles from './index.module.scss';
 
 export const query = graphql`
   query IndexQuery {
@@ -22,9 +23,9 @@ export default class Index extends React.Component {
     const vias = this.props.data.allContentfulViaFerrata.edges;
     return (
       <Layout>
-        <section className="container">
+        <section className={styles.index}>
           <h1>Via ferratas !</h1>
-          <ul>
+          <ul className={styles.list}>
             {vias.map(({ node: via }) => (
               <li key={via.id}>
                 <ViaCard {...via} />

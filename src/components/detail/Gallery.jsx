@@ -1,4 +1,5 @@
 import 'react-image-lightbox/style.css';
+import Icon, { ICONS } from '../Icon';
 import Img from 'gatsby-image';
 import Lightbox from 'react-image-lightbox';
 import PropTypes from 'prop-types';
@@ -122,6 +123,7 @@ export default class Gallery extends React.Component {
     const { thumbnail, description } = item;
     return (
       <span onClick={() => this.onThumbnailClick(item)}>
+        <Icon icon={ICONS.MAGNIFY} />
         <Img fluid={thumbnail} className="img-fluid" title={description} />
       </span>
     );
