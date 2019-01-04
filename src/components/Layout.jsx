@@ -22,7 +22,7 @@ export default class Layout extends React.Component {
           />
         </Helmet>
         <Header />
-        <div className="container">{children}</div>
+        <div className="container-fluid">{children}</div>
         <Footer />
       </>
     );
