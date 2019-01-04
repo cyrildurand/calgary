@@ -78,7 +78,7 @@ export default class Header extends React.Component {
         className={`${styles.header} ${this.state.headerScrolled ? styles.headerScrolled : ''}`}
       >
         <div className={styles.banner}>
-          <div className={`container ${styles.mainMenu}`}>
+          <div className={`container-fluid ${styles.mainMenu}`}>
             <div className="row align-items-center justify-content-between">
               <Link to="/" className={styles.logo}>
                 <Icon icon={ICONS.LOGO} />
@@ -89,7 +89,6 @@ export default class Header extends React.Component {
                   {this.menuItems.map(menuItem => (
                     <MenuItem
                       key={menuItem.id}
-                      onClick={() => this.setState({ mobileNavActive: false })}
                       {...menuItem}
                     />
                   ))}
