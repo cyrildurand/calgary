@@ -80,12 +80,12 @@ export default class Detail extends React.Component {
             <Section name="Difficulty">
               <Difficulty
                 values={[
-                  { name: 'F', percentage: 3 },
-                  { name: 'PD', percentage: 0 },
-                  { name: 'AD', percentage: 0 },
-                  { name: 'D', percentage: 33 },
-                  { name: 'TD', percentage: 57 },
-                  { name: 'ED', percentage: 9 },
+                  { name: 'F', value: 7 },
+                  { name: 'PD', value: 13 },
+                  { name: 'AD', value: 88 },
+                  { name: 'D', value: 9 },
+                  { name: 'TD', value: 1 },
+                  { name: 'ED', value: 0 },
                 ]}
               />
             </Section>
