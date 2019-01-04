@@ -25,10 +25,13 @@ export default class MenuItem extends React.Component {
   hasChild() {
     return Array.isArray(this.props.menuItems) && this.props.menuItems.length > 0;
   }
-  hasChildMenuItemClick() {
+  hasChildMenuItemClick(event) {
     this.setState(previousState => ({ active: !previousState.active }));
-    if (this.props.onClick && typeof (this.props.onClick == 'function')) {
+    if (this.props.onClick && typeof this.props.onClick == 'function') {
       this.props.onClick();
+    }
+    if (this.hasChild()) {
+      event.preventDefault();
     }
   }
   render() {
@@ -39,7 +42,7 @@ export default class MenuItem extends React.Component {
         onMouseLeave={() => this.setState({ active: false })}
         className={this.state.active ? styles.navActive : null}
       >
-        <Link to={`${path}#${id}`} onClick={() => this.hasChildMenuItemClick()}>
+        <Link to={`${path}#${id}`} onClick={event => this.hasChildMenuItemClick(event)}>
           {text}
           {this.hasChild() && (
             <Icon icon={this.state.active ? ICONS.CHEVRON_UP : ICONS.CHEVRON_DOWN} />
