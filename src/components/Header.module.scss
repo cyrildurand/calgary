@@ -1,11 +1,12 @@
 @import '../styles/common';
+$baseZindex : 2000;
 
 .header {
     position: fixed;
     left: 0;
     top: 0;
     right: 0;
-    z-index: 997;
+    z-index: $baseZindex;
     background-color: #04091e;
 
     .banner {
@@ -106,7 +107,7 @@
                 display: none;
                 padding: 20px 0 0 0;
                 position: absolute;
-                z-index: 99;
+                z-index: $baseZindex + 2;
                 top: 100%;
                 right: 0;
             }
@@ -166,7 +167,7 @@
     color:#FFF;
     fill:#FFF;
     float: right;
-    z-index: 999;
+    z-index: $baseZindex+2;
     border: 0;
     background: none;
     font-size: 24px;
@@ -187,7 +188,7 @@
         top: 0;
         padding-top: 18px;
         bottom: 0;
-        z-index: 998;
+        z-index: $baseZindex + 1;
         background: rgba(0, 0, 0, 0.8);
         left: -260px;
         width: 260px;
@@ -232,12 +233,12 @@
         width: 0;
         height: 0;
         opacity: 0;
-        z-index: 997;
+        z-index: $baseZindex;
         top: 0;
         left: 0;
         position: fixed;
         background: rgba(0, 0, 0, 0.7);
-        // can't pass comma un mixin function need to use 2 brackets. see https://github.com/haml/haml/issues/279 
+        // can't pass comma in mixin function need to use 2 brackets. see https://github.com/haml/haml/issues/279 
         @include transition((opacity 0.5s, height 0s linear 0.5s, width 0s linear 0.5s));
     }
 
