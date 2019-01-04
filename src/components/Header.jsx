@@ -35,7 +35,7 @@ export default class Header extends React.Component {
   constructor() {
     super();
     this.windowScroll = this.windowScroll.bind(this);
-
+    
     this.state = {
       headerScrolled: false,
       mobileNavActive: false,
@@ -49,11 +49,16 @@ export default class Header extends React.Component {
     window.removeEventListener('scroll', this.windowScroll);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     if (this.state.mobileNavActive) {
       document.body.classList.add(styles.mobileNavActive);
     } else {
       document.body.classList.remove(styles.mobileNavActive);
+    }
+
+    if (prevProps.location !== this.props.location) {
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({ mobileNavActive: false });
     }
   }
 
@@ -87,10 +92,7 @@ export default class Header extends React.Component {
               <nav className={styles.navMenuContainer}>
                 <ul>
                   {this.menuItems.map(menuItem => (
-                    <MenuItem
-                      key={menuItem.id}
-                      {...menuItem}
-                    />
+                    <MenuItem key={menuItem.id} {...menuItem} />
                   ))}
                 </ul>
               </nav>
