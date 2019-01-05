@@ -1,35 +1,10 @@
-import { Link } from 'gatsby';
+import { Link, StaticQuery, graphql } from 'gatsby';
 import Icon, { ICONS } from '../components/Icon';
 import MenuItem from './MenuItem';
 import React from 'react';
 import styles from './Header.module.scss';
 
 export default class Header extends React.Component {
-  menuItems = [
-    { id: 'home', text: 'Home', path: '/' },
-    { id: 'list', text: 'List', path: '/list' },
-    { id: 'page3', text: 'Help', path: '/help' },
-    {
-      id: 'pages',
-      text: 'Pages',
-      menuItems: [
-        { id: '1A', text: 'Level 1.A', path: '/page1A' },
-        { id: '1B', text: 'Level 1.B', path: '/page1B' },
-        {
-          id: '1C',
-          text: 'Level 1.C',
-          menuItems: [
-            { id: '2A', text: 'Level 2.A', path: '/page2A' },
-            { id: '2B', text: 'Level 2.B', path: '/page2B' },
-            { id: '2C', text: 'Level 2.C', path: '/page2C' },
-          ],
-        },
-        { id: '1D', text: 'Level 1.D', path: '/page1D' },
-      ],
-    },
-    { id: 'contact', text: 'Contact', path: '/contact' },
-  ];
-
   constructor() {
     super();
     this.windowScroll = this.windowScroll.bind(this);
@@ -86,13 +61,41 @@ export default class Header extends React.Component {
                 <Icon icon={ICONS.LOGO} />
                 <span>Calgary</span>
               </Link>
-              <nav className={styles.navMenuContainer}>
-                <ul>
-                  {this.menuItems.map(menuItem => (
-                    <MenuItem key={menuItem.id} {...menuItem} />
-                  ))}
-                </ul>
-              </nav>
+              <StaticQuery
+                query={graphql`
+                  query {
+                    root: contentfulNavigationItem(
+                      title: { eq: "menu" }
+                      node_locale: { eq: "fr" }
+                    ) {
+                      menuItems: contentfulchildren {
+                        id
+                        title
+                        path
+                        menuItems: contentfulchildren {
+                          id
+                          title
+                          path
+                          menuItems: contentfulchildren {
+                            id
+                            title
+                            path
+                          }
+                        }
+                      }
+                    }
+                  }
+                `}
+                render={data => (
+                  <nav className={styles.navMenuContainer}>
+                    <ul>
+                      {data.root.menuItems.map(menuItem => (
+                        <MenuItem key={menuItem.id} {...menuItem} />
+                      ))}
+                    </ul>
+                  </nav>
+                )}
+              />
               <button
                 type="button"
                 className={styles.mobileNavToggle}
