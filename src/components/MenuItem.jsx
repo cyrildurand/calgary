@@ -5,7 +5,6 @@ import React from 'react';
 import styles from './Header.module.scss';
 
 const menuItemPropTypes = {
-  onClick: PropTypes.func,
   id: PropTypes.string.isRequired,
   text: PropTypes.string.isRequired,
   path: PropTypes.string,
