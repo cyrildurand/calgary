@@ -6,36 +6,35 @@ import styles from './Header.module.scss';
 
 export default class Header extends React.Component {
   menuItems = [
-    { id: '0.A', text: 'Home', path: '/' },
-    { id: '0.B', text: 'About', path: '/' },
-    { id: '0.C', text: 'Packages', path: '/' },
+    { id: 'home', text: 'Home', path: '/' },
+    { id: 'list', text: 'List', path: '/list' },
+    { id: 'page3', text: 'Help', path: '/help' },
     {
-      id: '0.D',
+      id: 'pages',
       text: 'Pages',
-      path: '/',
       menuItems: [
-        { id: '1.A', text: 'Level 1.A', path: '/' },
-        { id: '1.B', text: 'Level 1.B', path: '/' },
+        { id: '1A', text: 'Level 1.A', path: '/page1A' },
+        { id: '1B', text: 'Level 1.B', path: '/page1B' },
         {
-          id: '1.C',
+          id: '1C',
           text: 'Level 1.C',
-          path: '/',
           menuItems: [
-            { id: '2.A', text: 'Level 2.A', path: '/' },
-            { id: '2.B', text: 'Level 2.B', path: '/' },
-            { id: '2.C', text: 'Level 2.C', path: '/' },
+            { id: '2A', text: 'Level 2.A', path: '/page2A' },
+            { id: '2B', text: 'Level 2.B', path: '/page2B' },
+            { id: '2C', text: 'Level 2.C', path: '/page2C' },
           ],
         },
-        { id: '1.D', text: 'Level 1.D', path: '/' },
+        { id: '1D', text: 'Level 1.D', path: '/page1D' },
       ],
     },
-    { id: '0.E', text: 'Contact', path: '/' },
+    { id: 'contact', text: 'Contact', path: '/contact' },
   ];
 
   constructor() {
     super();
     this.windowScroll = this.windowScroll.bind(this);
-    
+    this.listenerHandler = this.listenerHandler.bind(this);
+
     this.state = {
       headerScrolled: false,
       mobileNavActive: false,
@@ -44,21 +43,17 @@ export default class Header extends React.Component {
 
   componentDidMount() {
     window.addEventListener('scroll', this.windowScroll);
+    window.addEventListener('gatsby::routeUpdate', this.listenerHandler);
   }
   componentWillUnmount() {
     window.removeEventListener('scroll', this.windowScroll);
+    window.removeEventListener('gatsby::routeUpdate', this.listenerHandler);
   }
-
   componentDidUpdate(prevProps) {
     if (this.state.mobileNavActive) {
       document.body.classList.add(styles.mobileNavActive);
     } else {
       document.body.classList.remove(styles.mobileNavActive);
-    }
-
-    if (prevProps.location !== this.props.location) {
-      // eslint-disable-next-line react/no-did-update-set-state
-      this.setState({ mobileNavActive: false });
     }
   }
 
@@ -67,7 +62,9 @@ export default class Header extends React.Component {
       mobileNavActive: !previousState.mobileNavActive,
     }));
   }
-
+  listenerHandler() {
+    this.setState({ mobileNavActive: false });
+  }
   windowScroll(e) {
     if (window.pageYOffset > 100) {
       this.setState({ headerScrolled: true });
