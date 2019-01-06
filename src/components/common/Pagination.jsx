@@ -1,9 +1,10 @@
 import { Link } from 'gatsby';
+import Icon, { ICONS } from './Icon';
 import PropTypes from 'prop-types';
 import React from 'react';
 import styles from './Pagination.module.scss';
 
-export default class Icon extends React.Component {
+export default class Pagination extends React.Component {
   static propTypes = {
     currentPageIndex: PropTypes.number.isRequired,
     pageCount: PropTypes.number.isRequired,
@@ -12,8 +13,21 @@ export default class Icon extends React.Component {
 
   getPageElement(pageIndex) {
     const { currentPageIndex, pageLinkBuilder } = this.props;
+
+    const getClassName = () => {
+      switch (pageIndex) {
+        case currentPageIndex:
+          return `d-block ${styles.current}`;
+        case currentPageIndex + 1:
+        case currentPageIndex - 1:
+          return 'd-none d-sm-block';
+        default:
+          return 'd-none d-md-block';
+      }
+    };
+
     return (
-      <li key={pageIndex} className={currentPageIndex == pageIndex ? styles.current : undefined}>
+      <li key={pageIndex} className={getClassName()}>
         <Link to={pageLinkBuilder(pageIndex)} role="button">
           {pageIndex + 1}
         </Link>
@@ -22,7 +36,7 @@ export default class Icon extends React.Component {
   }
   getBreakElement(pageIndex) {
     return (
-      <li key={pageIndex}>
+      <li key={pageIndex} className="d-none d-md-block">
         <span>...</span>
       </li>
     );
@@ -102,28 +116,38 @@ export default class Icon extends React.Component {
   }
   render() {
     const { currentPageIndex, pageCount, pageLinkBuilder } = this.props;
+    const items = this.getPagination();
 
     const isFirst = currentPageIndex === 0;
     const isLast = currentPageIndex === pageCount - 1;
-    const items = this.getPagination();
 
     return (
       <ul className={styles.pagination} role="menubar" aria-label="Pagination">
-        {!isFirst && (
-          <li>
-            <Link to={pageLinkBuilder(currentPageIndex - 1)} rel="prev" role="button">
-              ←
-            </Link>
-          </li>
-        )}
+        <li className={`${isFirst ? styles.disabled : ''} d-block d-md-none`}>
+          <Link to={pageLinkBuilder(0)} rel="first" role="button">
+            <Icon color="rgba(255, 255, 255, 0.85)" icon={ICONS.FIRST} />
+          </Link>
+        </li>
+        <li className={`${isFirst ? styles.disabled : ''} d-block d-md-none`}>
+          <Link to={pageLinkBuilder(Math.max(currentPageIndex - 1, 0))} rel="prev" role="button">
+            <Icon color="rgba(255, 255, 255, 0.85)" icon={ICONS.PREVIOUS} />
+          </Link>
+        </li>
         {items}
-        {!isLast && (
-          <li>
-            <Link to={pageLinkBuilder(currentPageIndex + 1)} rel="next" role="button">
-              →
-            </Link>
-          </li>
-        )}
+        <li className={`${isLast ? styles.disabled : ''} d-block d-md-none`}>
+          <Link
+            to={pageLinkBuilder(Math.min(currentPageIndex + 1, pageCount - 1))}
+            rel="next"
+            role="button"
+          >
+            <Icon color="rgba(255, 255, 255, 0.85)" icon={ICONS.NEXT} />
+          </Link>
+        </li>
+        <li className={`${isLast ? styles.disabled : ''} d-block d-md-none`}>
+          <Link to={pageLinkBuilder(pageCount - 1)} rel="last" role="button">
+            <Icon color="rgba(255, 255, 255, 0.85)" icon={ICONS.LAST} />
+          </Link>
+        </li>
       </ul>
     );
   }
