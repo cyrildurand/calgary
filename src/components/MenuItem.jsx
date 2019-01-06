@@ -4,13 +4,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import styles from './Header.module.scss';
 
-const menuItemPropTypes = {
-  id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  path: PropTypes.string,
-};
-menuItemPropTypes.menuItems = PropTypes.arrayOf(PropTypes.shape(menuItemPropTypes));
-
 export default class MenuItem extends React.Component {
   constructor() {
     super();
@@ -19,7 +12,16 @@ export default class MenuItem extends React.Component {
     };
   }
 
-  static propTypes = menuItemPropTypes;
+  static propTypes = {
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    path: PropTypes.string,
+    menuItems(...args){
+      // see https://github.com/yannickcr/eslint-plugin-react/issues/2122
+      // eslint-disable-next-line no-undef 
+      return PropTypes.arrayOf(PropTypes.shape(propTypes))(...args);
+    },
+  };;
 
   hasChild() {
     return Array.isArray(this.props.menuItems) && this.props.menuItems.length > 0;
