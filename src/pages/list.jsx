@@ -1,7 +1,7 @@
-import { graphql } from 'gatsby';
-import Layout from '../components/Layout';
+import { Link, graphql } from 'gatsby';
+import Layout from '../components/layout/Layout';
+import PropTypes from 'prop-types';
 import React from 'react';
-import ViaCard from '../components/ViaCard';
 import styles from './list.module.scss';
 
 export const query = graphql`
@@ -19,6 +19,21 @@ export const query = graphql`
 `;
 
 export default class List extends React.Component {
+  static propTypes = {
+    data: PropTypes.shape({
+      allContentfulViaFerrata: PropTypes.shape({
+        edges: PropTypes.arrayOf(
+          PropTypes.shape({
+            node: PropTypes.shape({
+              id: PropTypes.string.isRequired,
+              name: PropTypes.string.isRequired,
+              slug: PropTypes.string.isRequired,
+            }),
+          })
+        ),
+      }),
+    }),
+  };
   render() {
     const vias = this.props.data.allContentfulViaFerrata.edges;
     return (
@@ -28,7 +43,10 @@ export default class List extends React.Component {
           <ul className={styles.list}>
             {vias.map(({ node: via }) => (
               <li key={via.id}>
-                <ViaCard {...via} />
+                <div className={styles.card}>
+                  <h3>{via.name}</h3>
+                  <Link to={`/via-${via.slug}/`}>Read more ... </Link>
+                </div>
               </li>
             ))}
           </ul>

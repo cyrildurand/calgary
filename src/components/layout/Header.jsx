@@ -1,5 +1,5 @@
 import { Link, StaticQuery, graphql } from 'gatsby';
-import Icon, { ICONS } from '../components/Icon';
+import Icon, { ICONS } from '../common/Icon';
 import MenuItem from './MenuItem';
 import React from 'react';
 import styles from './Header.module.scss';

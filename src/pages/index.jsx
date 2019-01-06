@@ -1,5 +1,5 @@
 import { Link } from 'gatsby';
-import Layout from '../components/Layout';
+import Layout from '../components/layout/Layout';
 import React from 'react';
 import styles from './index.module.scss';
 

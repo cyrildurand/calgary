@@ -1,5 +1,5 @@
 import { Link } from 'gatsby';
-import Icon, { ICONS } from '../components/Icon';
+import Icon, { ICONS } from '../common/Icon';
 import PropTypes from 'prop-types';
 import React from 'react';
 import styles from './Header.module.scss';
