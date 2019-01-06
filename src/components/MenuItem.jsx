@@ -16,18 +16,15 @@ export default class MenuItem extends React.Component {
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     path: PropTypes.string,
-    menuItems(...args){
-      // see https://github.com/yannickcr/eslint-plugin-react/issues/2122
-      // eslint-disable-next-line no-undef 
-      return PropTypes.arrayOf(PropTypes.shape(propTypes))(...args);
-    },
-  };;
+    menuItems: PropTypes.arrayOf(PropTypes.shape(MenuItem.propTypes)),
+  };
 
   hasChild() {
     return Array.isArray(this.props.menuItems) && this.props.menuItems.length > 0;
   }
   render() {
     const { title, path, menuItems } = this.props;
+
     return (
       <li
         onMouseEnter={() => this.setState({ active: true })}
