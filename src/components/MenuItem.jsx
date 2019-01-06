@@ -37,9 +37,10 @@ export default class MenuItem extends React.Component {
         {this.hasChild() && (
           <>
             <span
-              onTouchStart={() =>
-                this.setState(previousState => ({ active: !previousState.active }))
-              }
+              onTouchEnd={event => {
+                this.setState(previousState => ({ active: !previousState.active }));
+                event.preventDefault();
+              }}
             >
               {title}
               <Icon icon={this.state.active ? ICONS.CHEVRON_UP : ICONS.CHEVRON_DOWN} />
