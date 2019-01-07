@@ -15,9 +15,25 @@ jobs:
           paths:
             - ./node_modules
       - run: npm run lint
+  build:
+    docker:
+      - image: circleci/node:lts
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: install-dependencies
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run: npm run build
 
 workflows:
   version: 2
   ci:
     jobs:
       - lint
+      - build
