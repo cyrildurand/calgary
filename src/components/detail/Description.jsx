@@ -3,7 +3,7 @@ import React from 'react';
 
 export default class Description extends React.Component {
   static propTypes = {
-    htmlDescription: PropTypes.string,
+    htmlDescription: PropTypes.string.isRequired,
   };
 
   render() {

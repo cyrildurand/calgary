@@ -2,7 +2,7 @@ import { Link, StaticQuery, graphql } from 'gatsby';
 import React from 'react';
 import styles from './Footer.module.scss';
 
-export default class Header extends React.Component {
+export default class Footer extends React.Component {
   render() {
     return (
       <footer className={styles.footerArea}>

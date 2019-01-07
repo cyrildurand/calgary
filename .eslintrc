@@ -1,20 +1,19 @@
 {
   "plugins": [
     "react",
-    "sort-imports-es6-autofix"
+    "prettier"
   ],
   "extends": [
+    "airbnb",
+    "prettier",
     "gatsby-standard",
     "eslint:recommended",
     "plugin:react/recommended"
   ],
   "rules": {
     "camelcase": "off",
-    "sort-imports-es6-autofix/sort-imports-es6": [2, {
-      "ignoreCase": false,
-      "ignoreMemberSort": false,
-      "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
-    }]
+    "react/destructuring-assignment": "off",
+    "prettier/prettier": "error"
   },
   "settings": {
     "import/resolver": {

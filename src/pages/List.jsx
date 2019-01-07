@@ -1,8 +1,8 @@
 import { Link, graphql } from 'gatsby';
-import Layout from '../components/layout/Layout';
 import PropTypes from 'prop-types';
 import React from 'react';
-import styles from './list.module.scss';
+import Layout from '../components/layout/Layout';
+import styles from './List.module.scss';
 
 export const query = graphql`
   query ListQuery {
@@ -30,10 +30,11 @@ export default class List extends React.Component {
               slug: PropTypes.string.isRequired,
             }),
           })
-        ),
-      }),
-    }),
+        ).isRequired,
+      }).isRequired,
+    }).isRequired,
   };
+
   render() {
     const vias = this.props.data.allContentfulViaFerrata.edges;
     return (

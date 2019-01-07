@@ -1,12 +1,12 @@
 import { graphql } from 'gatsby';
+import React from 'react';
+import PropTypes from 'prop-types';
 import AdditionalInformation from '../components/detail/AdditionalInformation';
 import Description from '../components/detail/Description';
 import Difficulty from '../components/detail/Difficulty';
 import Gallery from '../components/detail/Gallery';
 import Layout from '../components/layout/Layout';
 import Location from '../components/detail/Location';
-import PropTypes from 'prop-types';
-import React from 'react';
 import Section from '../components/common/Section';
 
 export const query = graphql`
@@ -38,12 +38,15 @@ export const query = graphql`
 
 export default class Detail extends React.Component {
   static propTypes = {
-    data: PropTypes.any.isRequired,
+    data: PropTypes.shape({
+      contentfulViaFerrata: PropTypes.object.isRequired,
+    }).isRequired,
   };
+
   constructor() {
     super();
-    this.state = { showGoogleMaps: true };
   }
+
   render() {
     const viaFerrata = this.props.data.contentfulViaFerrata;
 

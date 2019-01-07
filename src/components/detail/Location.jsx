@@ -2,10 +2,10 @@ import '../../../node_modules/leaflet/dist/leaflet.css';
 import 'react-leaflet-fullscreen-control';
 import * as L from 'leaflet';
 import { LayersControl, Map, Marker, TileLayer } from 'react-leaflet';
-import Icon, { ICONS } from '../common/Icon';
 import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
+import Icon, { ICONS } from '../common/Icon';
 
 export default class Location extends React.Component {
   static propTypes = {

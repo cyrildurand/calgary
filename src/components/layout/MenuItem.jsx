@@ -1,17 +1,10 @@
 import { Link } from 'gatsby';
-import Icon, { ICONS } from '../common/Icon';
 import PropTypes from 'prop-types';
 import React from 'react';
+import Icon, { ICONS } from '../common/Icon';
 import styles from './Header.module.scss';
 
 export default class MenuItem extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      active: false,
-    };
-  }
-
   static propTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
@@ -19,8 +12,21 @@ export default class MenuItem extends React.Component {
     menuItems: PropTypes.arrayOf(PropTypes.shape(MenuItem.propTypes)),
   };
 
+  static defaultProps = {
+    path: null,
+    menuItems: [],
+  };
+
+  constructor() {
+    super();
+    this.state = {
+      active: false,
+    };
+  }
+
   hasChild() {
-    return Array.isArray(this.props.menuItems) && this.props.menuItems.length > 0;
+    const { menuItems } = this.props;
+    return Array.isArray(menuItems) && menuItems.length > 0;
   }
   render() {
     const { title, path, menuItems } = this.props;

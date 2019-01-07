@@ -25,6 +25,7 @@ export default class Icon extends React.Component {
   static defaultProps = {
     width: 24,
     height: 24,
+    color: '#FFF',
   };
 
   render() {
@@ -43,6 +44,7 @@ export default class Icon extends React.Component {
         viewBox={config.viewBox}
       >
         {config.paths.map((path, i) => {
+          // eslint-disable-next-line react/no-array-index-key
           return <path key={i} style={{ fill: color }} d={path} />;
         })}
       </svg>

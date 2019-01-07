@@ -1,7 +1,7 @@
 import { Link, StaticQuery, graphql } from 'gatsby';
+import React from 'react';
 import Icon, { ICONS } from '../common/Icon';
 import MenuItem from './MenuItem';
-import React from 'react';
 import styles from './Header.module.scss';
 
 export default class Header extends React.Component {
@@ -20,16 +20,16 @@ export default class Header extends React.Component {
     window.addEventListener('scroll', this.windowScroll);
     window.addEventListener('gatsby::routeUpdate', this.listenerHandler);
   }
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.windowScroll);
-    window.removeEventListener('gatsby::routeUpdate', this.listenerHandler);
-  }
   componentDidUpdate(prevProps) {
     if (this.state.mobileNavActive) {
       document.body.classList.add(styles.mobileNavActive);
     } else {
       document.body.classList.remove(styles.mobileNavActive);
     }
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.windowScroll);
+    window.removeEventListener('gatsby::routeUpdate', this.listenerHandler);
   }
 
   mobileNavToggleClick(e) {
@@ -111,6 +111,7 @@ export default class Header extends React.Component {
             <div
               className={styles.mobileBodyOverlay}
               onClick={() => this.setState({ mobileNavActive: false })}
+              role="presentation"
             />
           </div>
         </div>

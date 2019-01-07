@@ -1,7 +1,7 @@
 import { Link } from 'gatsby';
-import Icon, { ICONS } from './Icon';
 import PropTypes from 'prop-types';
 import React from 'react';
+import Icon, { ICONS } from './Icon';
 import styles from './Pagination.module.scss';
 
 export default class Pagination extends React.Component {

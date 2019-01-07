@@ -1,7 +1,7 @@
 import { Link } from 'gatsby';
-import Layout from '../components/layout/Layout';
 import React from 'react';
-import styles from './index.module.scss';
+import Layout from '../components/layout/Layout';
+import styles from './Index.module.scss';
 
 export default class Index extends React.Component {
   render() {

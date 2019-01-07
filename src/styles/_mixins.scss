@@ -1,7 +1,6 @@
 @mixin transition($args: all 0.3s ease 0s) {
-    -webkit-transition: $args;
-       -moz-transition: $args;
-         -o-transition: $args;
-            transition: $args;
-  }
-  
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
