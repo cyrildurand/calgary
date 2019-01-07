@@ -1,126 +1,125 @@
 .gallery {
-    $borderSize: 1px;
-    display: flex;
-    flex-wrap: wrap;
+  $borderSize: 1px;
+  display: flex;
+  flex-wrap: wrap;
 
-    li {
-        position: relative;
-        cursor: pointer;
-    }
+  li {
+    position: relative;
+    cursor: pointer;
+  }
 
-    button {
-        width: 100%;
-        /* height: 100%; */
-        display: block;
-        cursor: pointer;
-        background-color: transparent;
-        border: none;
-        padding: 0;
-        margin: 0;
-    }
+  button {
+    width: 100%;
+    display: block;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
 
+  button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border: 0 solid #fff;
+    z-index: 1;
+  }
+
+  .column1 {
     button::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        border: 0 solid #fff;
-        z-index: 1;
+      border-right-width: $borderSize;
     }
 
-    .column1 {
-        button::after {
-            border-right-width: $borderSize;
-        }
-
-        button:first-child::after {
-            border-bottom-width: $borderSize;
-        }
-
-        button:last-child::after {
-            border-top-width: $borderSize;
-        }
+    button:first-child::after {
+      border-bottom-width: $borderSize;
     }
 
-    .column2 {
-        button::after {
-            border-left-width: $borderSize;
-        }
+    button:last-child::after {
+      border-top-width: $borderSize;
+    }
+  }
 
-        button:first-child::after {
-            border-bottom-width: $borderSize;
-        }
-
-        button:nth-child(2)::after {
-            border-top-width: $borderSize;
-            border-bottom-width: $borderSize;
-        }
-
-        button:last-child::after {
-            border-top-width: $borderSize;
-        }
+  .column2 {
+    button::after {
+      border-left-width: $borderSize;
     }
 
-    svg {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 30px;
-        height: 30px;
-        margin-top: -11px;
-        margin-left: -13px;
-        opacity: 0;
-        fill: #fff;
-        pointer-events: none;
-        z-index: 1;
-        transition: opacity 0.4s;
+    button:first-child::after {
+      border-bottom-width: $borderSize;
     }
 
-    li::after {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(46, 132, 206, 0);
-        content: '';
-        transition: background-color 0.4s;
+    button:nth-child(2)::after {
+      border-top-width: $borderSize;
+      border-bottom-width: $borderSize;
     }
 
-    li:hover svg {
-        opacity: 1;
+    button:last-child::after {
+      border-top-width: $borderSize;
     }
+  }
 
-    li:hover::after {
-        background-color: rgba(46, 132, 206, 0.7);
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 30px;
+    margin-top: -11px;
+    margin-left: -13px;
+    opacity: 0;
+    fill: #fff;
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity 0.4s;
+  }
+
+  li::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(46, 132, 206, 0);
+    content: '';
+    transition: background-color 0.4s;
+  }
+
+  li:hover svg {
+    opacity: 1;
+  }
+
+  li:hover::after {
+    background-color: rgba(46, 132, 206, 0.7);
+  }
+
+  li:hover div.overlay {
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  div.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+
+    div {
+      display: table;
+      width: 100%;
+      height: 100%;
+
+      p {
+        display: table-cell;
+        font-weight: bolder;
+        text-align: center;
+        vertical-align: middle;
+        font-size: xx-large;
+        color: #fff;
+      }
     }
-
-    li:hover div.overlay {
-        opacity: 0;
-        transition: opacity 0.4s;
-    }
-
-    div.overlay {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-
-        div {
-            display: table;
-            width: 100%;
-            height: 100%;
-
-            p {
-                display: table-cell;
-                font-weight: bolder;
-                text-align: center;
-                vertical-align: middle;
-                font-size: xx-large;
-                color: #fff;
-            }
-        }
-    }
+  }
 }

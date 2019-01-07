@@ -3,84 +3,84 @@
 /* =================================== */
 
 ::-moz-selection {
-    /* Code for Firefox */
-    background-color: $primary-color;
-    color: $white;
+  /* Code for Firefox */
+  background-color: $primary-color;
+  color: $white;
 }
 
 ::selection {
-    background-color: $primary-color;
-    color: $white;
+  background-color: $primary-color;
+  color: $white;
 }
 
 ::-webkit-input-placeholder {
-    /* WebKit, Blink, Edge */
-    color: #777777;
-    font-weight: 300;
+  /* WebKit, Blink, Edge */
+  color: #777777;
+  font-weight: 300;
 }
 
 :-moz-placeholder {
-    /* Mozilla Firefox 4 to 18 */
-    color: #777777;
-    opacity: 1;
-    font-weight: 300;
+  /* Mozilla Firefox 4 to 18 */
+  color: #777777;
+  opacity: 1;
+  font-weight: 300;
 }
 
 ::-moz-placeholder {
-    /* Mozilla Firefox 19+ */
-    color: #777777;
-    opacity: 1;
-    font-weight: 300;
+  /* Mozilla Firefox 19+ */
+  color: #777777;
+  opacity: 1;
+  font-weight: 300;
 }
 
 :-ms-input-placeholder {
-    /* Internet Explorer 10-11 */
-    color: #777777;
-    font-weight: 300;
+  /* Internet Explorer 10-11 */
+  color: #777777;
+  font-weight: 300;
 }
 
 ::-ms-input-placeholder {
-    /* Microsoft Edge */
-    color: #777777;
-    font-weight: 300;
+  /* Microsoft Edge */
+  color: #777777;
+  font-weight: 300;
 }
 
 body {
-    color: $text-color;
-    font-family: $primary-font;
-    font-size: 14px;
-    font-weight: 300;
-    position: relative;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  color: $text-color;
+  font-family: $primary-font;
+  font-size: 14px;
+  font-weight: 300;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ol,
 ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 select {
-    display: block;
+  display: block;
 }
 
 figure {
-    margin: 0;
+  margin: 0;
 }
 
 a {
-    @include transition(all 0.3s ease 0s);
+  @include transition(all 0.3s ease 0s);
 }
 
 iframe {
-    border: 0;
+  border: 0;
 }
 
 a,
 a:focus,
 a:hover {
-    text-decoration: none;
-    outline: 0;
+  text-decoration: none;
+  outline: 0;
 }
