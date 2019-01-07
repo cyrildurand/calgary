@@ -1,9 +1,9 @@
 import '../../styles/main.scss';
-import Footer from './Footer';
-import Header from './Header';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
+import Header from './Header';
+import Footer from './Footer';
 
 export default class Layout extends React.Component {
   static propTypes = {

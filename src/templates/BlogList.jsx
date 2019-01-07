@@ -1,9 +1,9 @@
 import { graphql } from 'gatsby';
-import Layout from '../components/layout/Layout';
-import Pagination from '../components/common/Pagination';
 import PropTypes from 'prop-types';
 import React from 'react';
-import styles from './blog-list.module.scss';
+import Layout from '../components/layout/Layout';
+import Pagination from '../components/common/Pagination';
+import styles from './BlogList.module.scss';
 
 export const query = graphql`
   query NewsQuery($skip: Int!, $limit: Int!) {
@@ -34,7 +34,7 @@ export default class BlogList extends React.Component {
     pageContext: PropTypes.shape({
       currentPageIndex: PropTypes.number.isRequired,
       pageCount: PropTypes.number.isRequired,
-    }),
+    }).isRequired,
     data: PropTypes.shape({
       allContentfulBlogPost: PropTypes.shape({
         edges: PropTypes.arrayOf(
@@ -48,11 +48,11 @@ export default class BlogList extends React.Component {
                 }),
               }),
               creationDate: PropTypes.string.isRequired,
-            }),
-          })
-        ),
-      }),
-    }),
+            }).isRequired,
+          }).isRequired
+        ).isRequired,
+      }).isRequired,
+    }).isRequired,
   };
 
   render() {

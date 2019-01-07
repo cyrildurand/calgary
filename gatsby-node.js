@@ -1,17 +1,23 @@
-const path = require(`path`)
+const path = require(`path`);
 
-exports.createPages = ({
-  graphql,
-  actions
-}) => {
-  const {
-    createPage
-  } = actions
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions;
+
+  // Gatsby only understand index and not Index (case sensitivity)
+  createPage({
+    path: `/`,
+    component: path.resolve('./src/pages/Index.jsx'),
+  });
+  createPage({
+    path: `/list`,
+    component: path.resolve('./src/pages/List.jsx'),
+  });
 
   const loadVias = new Promise((resolve, reject) => {
-    resolve(graphql(`
+    resolve(
+      graphql(`
         {
-          allContentfulViaFerrata{
+          allContentfulViaFerrata {
             edges {
               node {
                 slug
@@ -20,75 +26,76 @@ exports.createPages = ({
           }
         }
       `).then(result => {
-      if (result.errors) {
-        reject(result.errors)
-      }
-      const vias = result.data.allContentfulViaFerrata.edges;
+        if (result.errors) {
+          reject(result.errors);
+        }
+        const vias = result.data.allContentfulViaFerrata.edges;
 
-      vias.forEach((edge) => {
-        createPage({
-          path: `via-${edge.node.slug}/`,
-          component: path.resolve('./src/templates/Detail.jsx'),
-          context: {
-            slug: edge.node.slug,
-          },
-        })
+        vias.forEach(edge => {
+          createPage({
+            path: `via-${edge.node.slug}/`,
+            component: path.resolve('./src/templates/Detail.jsx'),
+            context: {
+              slug: edge.node.slug,
+            },
+          });
+        });
       })
-    }))
+    );
   });
 
   const loadBlogList = new Promise((resolve, reject) => {
     resolve(
-      graphql(`{
-            allContentfulBlogPost(
-              filter: { node_locale: { eq: "fr" } }
-            ) {
-              totalCount
-            }
+      graphql(`
+        {
+          allContentfulBlogPost(filter: { node_locale: { eq: "fr" } }) {
+            totalCount
           }
-      `)
-      .then(result => {
+        }
+      `).then(result => {
         if (result.errors) {
-          reject(result.errors)
+          reject(result.errors);
         }
 
         // Create blog-list pages
-        const postsCount = result.data.allContentfulBlogPost.totalCount
+        const postsCount = result.data.allContentfulBlogPost.totalCount;
         const postsPerPage = 10;
-        const pageCount = Math.ceil(postsCount / postsPerPage)
-        Array.from({
-          length: pageCount
-        }, (_, i) => {
-          createPage({
-            path: i === 0 ? `/blog` : `/blog/${i + 1}`,
-            component: path.resolve('./src/templates/blog-list.jsx'),
-            context: {
-              limit: postsPerPage,
-              skip: i * postsPerPage,
-              pageCount,
-              currentPageIndex: i
-            },
-          })
-        })
-      }))
+        const pageCount = Math.ceil(postsCount / postsPerPage);
+        Array.from(
+          {
+            length: pageCount,
+          },
+          (_, i) => {
+            createPage({
+              path: i === 0 ? `/blog` : `/blog/${i + 1}`,
+              component: path.resolve('./src/templates/BlogList.jsx'),
+              context: {
+                limit: postsPerPage,
+                skip: i * postsPerPage,
+                pageCount,
+                currentPageIndex: i,
+              },
+            });
+          }
+        );
+      })
+    );
   });
 
   return Promise.all([loadVias, loadBlogList]);
-}
+};
 
-exports.onCreateWebpackConfig = ({
-  stage,
-  loaders,
-  actions
-}) => {
-  if (stage === "build-html") {
+exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+  if (stage === 'build-html') {
     actions.setWebpackConfig({
       module: {
-        rules: [{
-          test: /leaflet/,
-          use: loaders.null(),
-        }, ],
+        rules: [
+          {
+            test: /leaflet/,
+            use: loaders.null(),
+          },
+        ],
       },
-    })
+    });
   }
-}
+};

@@ -1,5 +1,5 @@
 @import '../../styles/common';
-$baseZindex : 2000;
+$baseZindex: 2000;
 
 .header {
     position: fixed;
@@ -24,7 +24,7 @@ $baseZindex : 2000;
 
     .banner {
         @include transition(padding 0.5s);
-        background-color: rgba(#04091e, .9);
+        background-color: rgba(#04091e, 0.9);
         padding-top: 5px;
         padding-bottom: 5px;
     }
@@ -35,11 +35,10 @@ $baseZindex : 2000;
     }
 }
 
-
 .main-menu {
     padding-bottom: 20px;
     padding-top: 20px;
-    background: rgba(#fff, .15);
+    background: rgba(#fff, 0.15);
     padding-left: 30px;
     padding-right: 30px;
 }
@@ -47,8 +46,8 @@ $baseZindex : 2000;
 .logo {
     $logoSize: 60px;
     padding-left: (15px + $logoSize);
-    color: #FFF;
-    fill: #FFF;
+    color: #fff;
+    fill: #fff;
     text-transform: uppercase;
     position: relative;
 
@@ -68,8 +67,8 @@ $baseZindex : 2000;
 
     a,
     span {
-        color: #FFF;
-        fill: #FFF;
+        color: #fff;
+        fill: #fff;
         font-weight: 500;
         text-transform: uppercase;
         text-decoration: none;
@@ -163,15 +162,14 @@ $baseZindex : 2000;
     }
 }
 
-
 /* Mobile Nav Toggle */
 .mobile-nav-toggle {
     @media (max-width: 991px) {
         display: inline;
     }
 
-    color:#FFF;
-    fill:#FFF;
+    color: #fff;
+    fill: #fff;
     float: right;
     z-index: $baseZindex+2;
     border: 0;
@@ -183,7 +181,7 @@ $baseZindex : 2000;
     cursor: pointer;
 
     i {
-        color: #FFF;
+        color: #fff;
         font-weight: 900;
     }
 }
@@ -216,7 +214,6 @@ $baseZindex : 2000;
                 display: none;
             }
 
-
             &.nav-active>div {
                 display: block;
             }
@@ -224,7 +221,6 @@ $baseZindex : 2000;
             li {
                 padding-left: 30px;
             }
-
         }
     }
 
@@ -245,7 +241,7 @@ $baseZindex : 2000;
         left: 0;
         position: fixed;
         background: rgba(0, 0, 0, 0.7);
-        // can't pass comma in mixin function need to use 2 brackets. see https://github.com/haml/haml/issues/279 
+        // can't pass comma in mixin function need to use 2 brackets. see https://github.com/haml/haml/issues/279
         @include transition((opacity 0.5s, height 0s linear 0.5s, width 0s linear 0.5s));
     }
 

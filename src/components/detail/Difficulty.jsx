@@ -1,8 +1,8 @@
 import { StaticQuery, graphql } from 'gatsby';
-import Icon, { ICONS } from '../common/Icon';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
 import React from 'react';
+import Icon, { ICONS } from '../common/Icon';
 import styles from './Difficulty.module.scss';
 
 Modal.setAppElement('#___gatsby');
@@ -145,7 +145,7 @@ export default class Difficulty extends React.Component {
                               id={e.node.code}
                               name="difficulty"
                               value={e.node.code}
-                              checked={this.state.value == e.node.code}
+                              checked={this.state.value === e.node.code}
                               onChange={this.handleChange}
                             />
                             {e.node.code} - {e.node.name}

@@ -2,7 +2,6 @@
 /*  Basic Style 
 /* =================================== */
 
-
 ::-moz-selection {
     /* Code for Firefox */
     background-color: $primary-color;
@@ -72,7 +71,7 @@ figure {
 }
 
 a {
-    @include transition(all .3s ease 0s);
+    @include transition(all 0.3s ease 0s);
 }
 
 iframe {

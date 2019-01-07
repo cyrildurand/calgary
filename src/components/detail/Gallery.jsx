@@ -1,9 +1,9 @@
 import 'react-image-lightbox/style.css';
-import Icon, { ICONS } from '../common/Icon';
 import Img from 'gatsby-image';
 import Lightbox from 'react-image-lightbox';
 import PropTypes from 'prop-types';
 import React from 'react';
+import Icon, { ICONS } from '../common/Icon';
 import styles from './Gallery.module.scss';
 
 export default class Gallery extends React.Component {
@@ -30,6 +30,34 @@ export default class Gallery extends React.Component {
 
   componentDidMount() {
     this.sortImages();
+  }
+
+  onThumbnailClick(item) {
+    this.setState({
+      photoIndex: item.index,
+      isOpen: true,
+    });
+  }
+  onLightboxClose() {
+    this.setState({
+      isOpen: false,
+    });
+  }
+  onClickPrevious() {
+    this.setState(previousState => {
+      return {
+        photoIndex:
+          (previousState.photoIndex + previousState.sortedImages.length - 1) %
+          previousState.sortedImages.length,
+      };
+    });
+  }
+  onClickNext() {
+    this.setState(previousState => {
+      return {
+        photoIndex: (previousState.photoIndex + 1) % previousState.sortedImages.length,
+      };
+    });
   }
 
   /**
@@ -91,41 +119,13 @@ export default class Gallery extends React.Component {
     }
   }
 
-  onThumbnailClick(item) {
-    this.setState({
-      photoIndex: item.index,
-      isOpen: true,
-    });
-  }
-  onLightboxClose() {
-    this.setState({
-      isOpen: false,
-    });
-  }
-  onClickPrevious() {
-    this.setState(previousState => {
-      return {
-        photoIndex:
-          (previousState.photoIndex + previousState.sortedImages.length - 1) %
-          previousState.sortedImages.length,
-      };
-    });
-  }
-  onClickNext() {
-    this.setState(previousState => {
-      return {
-        photoIndex: (previousState.photoIndex + 1) % previousState.sortedImages.length,
-      };
-    });
-  }
-
   renderImage(item) {
     const { thumbnail, description } = item;
     return (
-      <span onClick={() => this.onThumbnailClick(item)}>
+      <button onClick={() => this.onThumbnailClick(item)} type="button">
         <Icon icon={ICONS.MAGNIFY} />
         <Img fluid={thumbnail} className="img-fluid" title={description} />
-      </span>
+      </button>
     );
   }
   render() {
