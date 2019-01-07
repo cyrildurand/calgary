@@ -1,20 +1,24 @@
 version: 2
 jobs:
-  build:
+  lint:
     working_directory: ~/
     docker:
-      image: circleci/node:lts
-    lint:
-      executor: node
-      steps:
-        - checkout
-        - restore_cache:
-            key: dependency-cache-{{ checksum "package.json" }}
-        - run:
-            name: install-dependencies
-            command: npm install
-        - save_cache:
-            key: dependency-cache-{{ checksum "package.json" }}
-            paths:
-              - ./node_modules
-        - run: npm run lint
+      - image: circleci/node:lts
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: install-dependencies
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - run: npm run lint
+
+workflows:
+  version: 2
+  ci:
+    jobs:
+      - lint
