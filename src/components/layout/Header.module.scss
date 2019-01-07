@@ -60,6 +60,10 @@ $baseZindex: 2000;
   }
 }
 
+.nav-menu-container {
+  height: 25px;
+}
+
 .nav-menu-container > ul {
   margin: 0;
   padding: 0;
@@ -174,7 +178,7 @@ $baseZindex: 2000;
   z-index: $baseZindex + 2;
   border: 0;
   background: none;
-  font-size: 24px;
+  height: 25px;
   display: none;
   @include transition(all 0.4s);
   outline: none;
