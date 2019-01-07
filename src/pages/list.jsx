@@ -5,7 +5,7 @@ import Layout from '../components/layout/Layout';
 import styles from './List.module.scss';
 
 export const query = graphql`
-  query ListQuery {
+  query {
     allContentfulViaFerrata {
       edges {
         node {
