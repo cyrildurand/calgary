@@ -5,6 +5,7 @@ import { Link, graphql } from 'gatsby';
 import ReactDOMServer from 'react-dom/server';
 import { LayersControl, Map, Marker, TileLayer, Popup, FeatureGroup } from 'react-leaflet';
 import 'react-leaflet-fullscreen-control';
+import LocateControl from '../components/map/LocateControl';
 import Icon, { ICONS } from '../components/common/Icon';
 import Layout from '../components/layout/Layout';
 import '../../node_modules/leaflet/dist/leaflet.css';
@@ -74,6 +75,9 @@ export default class MapPage extends React.Component {
                   <TileLayer url="https://{s}.tile.osm.org/{z}/{x}/{y}.png" />
                 </LayersControl.BaseLayer>
               </LayersControl>
+              <LocateControl flyTo>
+                <Icon color="#000" icon={ICONS.LOCATE_ME} />
+              </LocateControl>
               <FeatureGroup onAdd={this.onFeatureGroupAdd}>
                 {vias.map(({ node: via }) => {
                   return (
