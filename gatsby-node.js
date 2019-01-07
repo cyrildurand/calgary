@@ -1,19 +1,30 @@
-const path = require(`path`);
+const path = require('path');
+
+exports.onCreatePage = ({ page, actions }) => {
+  const { createPage, deletePage } = actions;
+  return new Promise(resolve => {
+    const oldPage = Object.assign({}, page);
+
+    // our conventions requires filename to be PascalCase but we wan't lowercase for path in url
+    // Gatsby don't use /Index.jsx but /index.jsx
+    if (page.path === '/Index/') {
+      page.path = '/';
+    } else {
+      page.path = page.path.toLowerCase();
+    }
+
+    if (page.path !== oldPage.path) {
+      deletePage(oldPage);
+      createPage(page);
+    }
+    resolve();
+  });
+};
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
 
-  // Gatsby only understand index and not Index (case sensitivity)
-  createPage({
-    path: `/`,
-    component: path.resolve('./src/pages/Index.jsx'),
-  });
-  createPage({
-    path: `/list`,
-    component: path.resolve('./src/pages/List.jsx'),
-  });
-
-  const loadVias = new Promise((resolve, reject) => {
+  const createVias = new Promise((resolve, reject) => {
     resolve(
       graphql(`
         {
@@ -44,7 +55,7 @@ exports.createPages = ({ graphql, actions }) => {
     );
   });
 
-  const loadBlogList = new Promise((resolve, reject) => {
+  const createBlogList = new Promise((resolve, reject) => {
     resolve(
       graphql(`
         {
@@ -82,7 +93,7 @@ exports.createPages = ({ graphql, actions }) => {
     );
   });
 
-  return Promise.all([loadVias, loadBlogList]);
+  return Promise.all([createVias, createBlogList]);
 };
 
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
