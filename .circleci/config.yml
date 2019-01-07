@@ -1,7 +1,6 @@
 version: 2
 jobs:
   lint:
-    working_directory: ~/
     docker:
       - image: circleci/node:lts
     steps:
