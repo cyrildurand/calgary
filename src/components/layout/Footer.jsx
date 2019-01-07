@@ -44,7 +44,7 @@ export default class Footer extends React.Component {
               )}
             />
           </div>
-          <div className="row d-block">Copyright © 2000-2018 Calgary</div>
+          <div className="row d-block">Copyright © 2000-2019 Calgary</div>
         </div>
       </footer>
     );
