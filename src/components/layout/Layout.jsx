@@ -2,15 +2,22 @@ import '../../styles/main.scss';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
+import stylePropType from 'react-style-proptype';
 import Header from './Header';
 import Footer from './Footer';
 
 export default class Layout extends React.Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
+    containerStyle: stylePropType,
   };
+
+  static defaultProps = {
+    containerStyle: {},
+  };
+
   render() {
-    const { children } = this.props;
+    const { children, containerStyle } = this.props;
     return (
       <>
         <Helmet>
@@ -22,7 +29,9 @@ export default class Layout extends React.Component {
           />
         </Helmet>
         <Header />
-        <div className="container-fluid">{children}</div>
+        <div className="container-fluid" style={containerStyle}>
+          {children}
+        </div>
         <Footer />
       </>
     );
