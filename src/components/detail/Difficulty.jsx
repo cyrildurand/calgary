@@ -1,5 +1,5 @@
 import { StaticQuery, graphql } from 'gatsby';
-import Icon, { ICONS } from '../Icon';
+import Icon, { ICONS } from '../common/Icon';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
 import React from 'react';

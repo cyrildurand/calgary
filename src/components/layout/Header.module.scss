@@ -1,4 +1,4 @@
-@import '../styles/common';
+@import '../../styles/common';
 $baseZindex : 2000;
 
 .header {
@@ -75,6 +75,7 @@ $baseZindex : 2000;
         text-decoration: none;
         outline: none;
         vertical-align: middle;
+        cursor: pointer;
     }
 
     li {

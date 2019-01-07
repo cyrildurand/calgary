@@ -3,11 +3,11 @@ import AdditionalInformation from '../components/detail/AdditionalInformation';
 import Description from '../components/detail/Description';
 import Difficulty from '../components/detail/Difficulty';
 import Gallery from '../components/detail/Gallery';
-import Layout from '../components/Layout';
+import Layout from '../components/layout/Layout';
 import Location from '../components/detail/Location';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Section from '../components/Section';
+import Section from '../components/common/Section';
 
 export const query = graphql`
   query Detail($slug: String!) {

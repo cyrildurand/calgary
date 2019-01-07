@@ -1,4 +1,4 @@
-import '../styles/main.scss';
+import '../../styles/main.scss';
 import Footer from './Footer';
 import Header from './Header';
 import Helmet from 'react-helmet';

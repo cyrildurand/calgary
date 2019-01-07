@@ -1,5 +1,5 @@
 import 'react-image-lightbox/style.css';
-import Icon, { ICONS } from '../Icon';
+import Icon, { ICONS } from '../common/Icon';
 import Img from 'gatsby-image';
 import Lightbox from 'react-image-lightbox';
 import PropTypes from 'prop-types';
