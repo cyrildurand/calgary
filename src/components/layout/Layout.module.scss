@@ -1,0 +1,7 @@
+$headerHeight: 95px;
+$footerHeight: 70px;
+
+.layout {
+  min-height: calc(100vh - #{$headerHeight + $footerHeight});
+  padding-top: 10px;
+}

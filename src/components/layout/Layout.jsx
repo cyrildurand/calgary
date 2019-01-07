@@ -5,6 +5,7 @@ import React from 'react';
 import stylePropType from 'react-style-proptype';
 import Header from './Header';
 import Footer from './Footer';
+import styles from './Layout.module.scss';
 
 export default class Layout extends React.Component {
   static propTypes = {
@@ -18,6 +19,7 @@ export default class Layout extends React.Component {
 
   render() {
     const { children, containerStyle } = this.props;
+
     return (
       <>
         <Helmet>
@@ -29,7 +31,7 @@ export default class Layout extends React.Component {
           />
         </Helmet>
         <Header />
-        <div className="container-fluid" style={containerStyle}>
+        <div className={`container-fluid ${styles.layout}`} style={containerStyle}>
           {children}
         </div>
         <Footer />

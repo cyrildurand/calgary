@@ -15,7 +15,7 @@ $baseZindex: 2000;
   }
 
   + div {
-    margin-top: 120px;
+    margin-top: 95px;
   }
 }
 
@@ -60,10 +60,6 @@ $baseZindex: 2000;
   }
 }
 
-.nav-menu-container {
-  height: 25px;
-}
-
 .nav-menu-container > ul {
   margin: 0;
   padding: 0;
@@ -100,6 +96,7 @@ $baseZindex: 2000;
 
 @media (min-width: 992px) {
   .nav-menu-container {
+    height: 25px;
     > ul {
       > li {
         float: left;
@@ -174,11 +171,11 @@ $baseZindex: 2000;
 
   color: #fff;
   fill: #fff;
+  height: 25px;
   float: right;
   z-index: $baseZindex + 2;
   border: 0;
   background: none;
-  height: 25px;
   display: none;
   @include transition(all 0.4s);
   outline: none;
@@ -207,7 +204,7 @@ $baseZindex: 2000;
       a,
       span {
         overflow: hidden;
-        padding: 10px 22px 10px 15px;
+        padding: 5px 22px 5px 15px;
         position: relative;
         width: 100%;
         display: block;
@@ -222,7 +219,7 @@ $baseZindex: 2000;
       }
 
       li {
-        padding-left: 30px;
+        padding-left: 20px;
       }
     }
   }
