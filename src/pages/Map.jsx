@@ -68,7 +68,7 @@ export default class MapPage extends React.Component {
                 <TileLayer url="https://{s}.tile.osm.org/{z}/{x}/{y}.png" />
               </LayersControl.BaseLayer>
             </LayersControl>
-            <LocateControl flyTo>
+            <LocateControl flyTo keepCurrentZoomLevel>
               <Icon color="#000" icon={ICONS.LOCATE_ME} />
             </LocateControl>
             <FeatureGroup onAdd={this.onFeatureGroupAdd}>
