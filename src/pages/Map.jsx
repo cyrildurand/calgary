@@ -4,7 +4,6 @@ import React from 'react';
 import { Link, graphql } from 'gatsby';
 import ReactDOMServer from 'react-dom/server';
 import { LayersControl, Map, Marker, TileLayer, Popup, FeatureGroup } from 'react-leaflet';
-import 'react-leaflet-fullscreen-control';
 import LocateControl from '../components/map/LocateControl';
 import Icon, { ICONS } from '../components/common/Icon';
 import Layout from '../components/layout/Layout';
@@ -60,54 +59,47 @@ export default class MapPage extends React.Component {
     return (
       <Layout containerStyle={{ padding: 0, display: 'flex', width: '100%' }}>
         {typeof window !== 'undefined' && (
-          <>
-            <Map
-              style={{ display: 'flex', width: '100%' }}
-              ref={c => (this.map = c)}
-              fullscreenControl
-              {...position}
-            >
-              <LayersControl position="topright">
-                <LayersControl.BaseLayer checked name="OpenTopoMap">
-                  <TileLayer url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png" />
-                </LayersControl.BaseLayer>
-                <LayersControl.BaseLayer name="OpenStreetMap">
-                  <TileLayer url="https://{s}.tile.osm.org/{z}/{x}/{y}.png" />
-                </LayersControl.BaseLayer>
-              </LayersControl>
-              <LocateControl flyTo>
-                <Icon color="#000" icon={ICONS.LOCATE_ME} />
-              </LocateControl>
-              <FeatureGroup onAdd={this.onFeatureGroupAdd}>
-                {vias.map(({ node: via }) => {
-                  return (
-                    <Marker
-                      key={via.id}
-                      position={[via.location.latitude, via.location.longitude]}
-                      icon={
-                        new L.Icon({
-                          iconUrl:
-                            'data:image/svg+xml;base64,' +
-                            btoa(
-                              ReactDOMServer.renderToString(
-                                <Icon color="#F0F" icon={ICONS.MAP_MARKER} />
-                              )
-                            ),
-                          iconAnchor: [12, 24],
-                        })
-                      }
-                    >
-                      <Popup>
-                        <span>
-                          <Link to={`via-${via.slug}`}>{via.name}</Link>
-                        </span>
-                      </Popup>
-                    </Marker>
-                  );
-                })}
-              </FeatureGroup>
-            </Map>
-          </>
+          <Map style={{ display: 'flex', width: '100%' }} ref={c => (this.map = c)} {...position}>
+            <LayersControl position="topright">
+              <LayersControl.BaseLayer checked name="OpenTopoMap">
+                <TileLayer url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png" />
+              </LayersControl.BaseLayer>
+              <LayersControl.BaseLayer name="OpenStreetMap">
+                <TileLayer url="https://{s}.tile.osm.org/{z}/{x}/{y}.png" />
+              </LayersControl.BaseLayer>
+            </LayersControl>
+            <LocateControl flyTo>
+              <Icon color="#000" icon={ICONS.LOCATE_ME} />
+            </LocateControl>
+            <FeatureGroup onAdd={this.onFeatureGroupAdd}>
+              {vias.map(({ node: via }) => {
+                return (
+                  <Marker
+                    key={via.id}
+                    position={[via.location.latitude, via.location.longitude]}
+                    icon={
+                      new L.Icon({
+                        iconUrl:
+                          'data:image/svg+xml;base64,' +
+                          btoa(
+                            ReactDOMServer.renderToString(
+                              <Icon color="#F0F" icon={ICONS.MAP_MARKER} />
+                            )
+                          ),
+                        iconAnchor: [12, 24],
+                      })
+                    }
+                  >
+                    <Popup>
+                      <span>
+                        <Link to={`via-${via.slug}`}>{via.name}</Link>
+                      </span>
+                    </Popup>
+                  </Marker>
+                );
+              })}
+            </FeatureGroup>
+          </Map>
         )}
       </Layout>
     );

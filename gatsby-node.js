@@ -98,7 +98,9 @@ exports.createPages = ({ graphql, actions }) => {
 
 // modules that should not go through webpack because it use window global variable which is not compatible with gatsby SSR
 const excludedModules = ['leaflet', 'leaflet.locatecontrol', 'react-leaflet-fullscreen-control'];
-const excludedModulePaths = excludedModules.map(module => path.resolve(`./node_modules/${module}`));
+const excludedModulePaths = excludedModules.map(
+  module => path.resolve(`./node_modules/${module}`) + path.sep
+);
 
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
   if (stage === 'build-html') {
