@@ -1,11 +1,11 @@
 import '../../../node_modules/leaflet/dist/leaflet.css';
-import 'react-leaflet-fullscreen-control';
 import * as L from 'leaflet';
 import { LayersControl, Map, Marker, TileLayer } from 'react-leaflet';
 import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import Icon, { ICONS } from '../common/Icon';
+import FullScreenControl from '../map/FullScreenControl';
 
 export default class Location extends React.Component {
   static propTypes = {
@@ -72,7 +72,7 @@ export default class Location extends React.Component {
         <div>
           {typeof window !== 'undefined' && (
             <>
-              <Map center={position} zoom={13} style={{ height: 400 }} fullscreenControl>
+              <Map center={position} zoom={13} style={{ height: 400 }}>
                 <LayersControl position="topright">
                   <LayersControl.BaseLayer checked name="OpenTopoMap">
                     <TileLayer url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png" />
@@ -81,6 +81,7 @@ export default class Location extends React.Component {
                     <TileLayer url="https://{s}.tile.osm.org/{z}/{x}/{y}.png" />
                   </LayersControl.BaseLayer>
                 </LayersControl>
+                <FullScreenControl />
                 <Marker
                   position={position}
                   icon={

@@ -26,6 +26,7 @@
     "gatsby-transformer-remark": "^2.1.19",
     "gatsby-transformer-sharp": "^2.1.10",
     "leaflet": "^1.4.0",
+    "leaflet-fullscreen": "^1.0.2",
     "leaflet.locatecontrol": "^0.66.0",
     "node-sass": "^4.11.0",
     "prop-types": "^15.6.2",
@@ -34,7 +35,6 @@
     "react-helmet": "^5.2.0",
     "react-image-lightbox": "^5.1.0",
     "react-leaflet": "^2.1.4",
-    "react-leaflet-fullscreen-control": "0.0.4",
     "react-modal": "^3.8.1",
     "react-style-proptype": "^3.2.2"
   },
