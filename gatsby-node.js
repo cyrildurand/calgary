@@ -24,72 +24,76 @@ exports.onCreatePage = ({ page, actions }) => {
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
 
-  const createVias = new Promise((resolve, reject) => {
-    resolve(
-      graphql(`
-        {
-          allContentfulViaFerrata {
-            edges {
-              node {
-                slug
-              }
-            }
-          }
-        }
-      `).then(result => {
-        if (result.errors) {
-          reject(result.errors);
-        }
-        const vias = result.data.allContentfulViaFerrata.edges;
-
-        vias.forEach(edge => {
-          createPage({
-            path: `via-${edge.node.slug}/`,
-            component: path.resolve('./src/templates/Detail.jsx'),
-            context: {
-              slug: edge.node.slug,
-            },
-          });
-        });
-      })
-    );
+  createPage({
+    path: `/contact`,
+    component: path.resolve('./src/templates/Contact.jsx'),
+  });
+  createPage({
+    path: `/contact/success`,
+    component: path.resolve('./src/templates/Contact.jsx'),
+    context: {
+      success: true,
+    },
   });
 
-  const createBlogList = new Promise((resolve, reject) => {
-    resolve(
-      graphql(`
-        {
-          allContentfulBlogPost(filter: { node_locale: { eq: "fr" } }) {
-            totalCount
+  const createVias = graphql(`
+    {
+      allContentfulViaFerrata {
+        edges {
+          node {
+            slug
           }
         }
-      `).then(result => {
-        if (result.errors) {
-          reject(result.errors);
-        }
+      }
+    }
+  `).then(result => {
+    if (result.errors) {
+      throw result.errors;
+    }
+    const vias = result.data.allContentfulViaFerrata.edges;
 
-        // Create blog-list pages
-        const postsCount = result.data.allContentfulBlogPost.totalCount;
-        const postsPerPage = 10;
-        const pageCount = Math.ceil(postsCount / postsPerPage);
-        Array.from(
-          {
-            length: pageCount,
+    vias.forEach(edge => {
+      createPage({
+        path: `/via-${edge.node.slug}/`,
+        component: path.resolve('./src/templates/Detail.jsx'),
+        context: {
+          slug: edge.node.slug,
+        },
+      });
+    });
+  });
+
+  const createBlogList = graphql(`
+    {
+      allContentfulBlogPost(filter: { node_locale: { eq: "fr" } }) {
+        totalCount
+      }
+    }
+  `).then(result => {
+    if (result.errors) {
+      throw result.errors;
+    }
+
+    // Create blog-list pages
+    const postsCount = result.data.allContentfulBlogPost.totalCount;
+    const postsPerPage = 10;
+    const pageCount = Math.ceil(postsCount / postsPerPage);
+    Array.from(
+      {
+        length: pageCount,
+      },
+      (_, i) => {
+        createPage({
+          path: i === 0 ? `/blog` : `/blog/${i + 1}`,
+          component: path.resolve('./src/templates/BlogList.jsx'),
+          context: {
+            limit: postsPerPage,
+            skip: i * postsPerPage,
+            pageCount,
+            currentPageIndex: i,
           },
-          (_, i) => {
-            createPage({
-              path: i === 0 ? `/blog` : `/blog/${i + 1}`,
-              component: path.resolve('./src/templates/BlogList.jsx'),
-              context: {
-                limit: postsPerPage,
-                skip: i * postsPerPage,
-                pageCount,
-                currentPageIndex: i,
-              },
-            });
-          }
-        );
-      })
+        });
+      }
     );
   });
 
