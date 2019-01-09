@@ -19,6 +19,7 @@ var config = {
         environment: contentfulConfig.environment,
       },
     },
+    'gatsby-plugin-catch-links',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     'gatsby-plugin-react-helmet',

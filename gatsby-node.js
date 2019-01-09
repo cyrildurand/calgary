@@ -36,6 +36,33 @@ exports.createPages = ({ graphql, actions }) => {
     },
   });
 
+  const createGenericContent = graphql(`
+    {
+      allContentfulPage {
+        edges {
+          node {
+            slug
+          }
+        }
+      }
+    }
+  `).then(result => {
+    if (result.errors) {
+      throw result.errors;
+    }
+    const pages = result.data.allContentfulPage.edges;
+
+    pages.forEach(edge => {
+      createPage({
+        path: edge.node.slug,
+        component: path.resolve('./src/templates/GenericContent.jsx'),
+        context: {
+          slug: edge.node.slug,
+        },
+      });
+    });
+  });
+
   const createVias = graphql(`
     {
       allContentfulViaFerrata {
@@ -74,7 +101,6 @@ exports.createPages = ({ graphql, actions }) => {
       throw result.errors;
     }
 
-    // Create blog-list pages
     const postsCount = result.data.allContentfulBlogPost.totalCount;
     const postsPerPage = 10;
     const pageCount = Math.ceil(postsCount / postsPerPage);
@@ -97,7 +123,7 @@ exports.createPages = ({ graphql, actions }) => {
     );
   });
 
-  return Promise.all([createVias, createBlogList]);
+  return Promise.all([createGenericContent, createVias, createBlogList]);
 };
 
 // modules that should not go through webpack because it use window global variable which is not compatible with gatsby SSR

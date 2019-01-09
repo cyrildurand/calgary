@@ -1,0 +1,10 @@
+[[redirects]]
+  from = "/histoire.php"
+  to = "/histoire"
+
+
+[[headers]]
+  for = "/sw.js"
+
+  [headers.values]
+    Cache-Control= "no-cache"
