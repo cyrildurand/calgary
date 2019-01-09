@@ -166,7 +166,10 @@ $baseZindex: 2000;
 /* Mobile Nav Toggle */
 .mobile-nav-toggle {
   @include media-breakpoint-down(md) {
-    display: inline;
+    display: inline-block;
+    padding: 10px;
+    margin: -10px;
+    box-sizing: content-box;
   }
 
   color: #fff;

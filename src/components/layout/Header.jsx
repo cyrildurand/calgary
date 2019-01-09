@@ -8,7 +8,7 @@ export default class Header extends React.Component {
   constructor() {
     super();
     this.windowScroll = this.windowScroll.bind(this);
-    this.listenerHandler = this.listenerHandler.bind(this);
+    this.routeUpdate = this.routeUpdate.bind(this);
 
     this.state = {
       headerScrolled: false,
@@ -18,7 +18,7 @@ export default class Header extends React.Component {
 
   componentDidMount() {
     window.addEventListener('scroll', this.windowScroll);
-    window.addEventListener('gatsby::routeUpdate', this.listenerHandler);
+    window.addEventListener('gatsby::routeUpdate', this.routeUpdate);
   }
   componentDidUpdate(prevProps) {
     if (this.state.mobileNavActive) {
@@ -29,7 +29,7 @@ export default class Header extends React.Component {
   }
   componentWillUnmount() {
     window.removeEventListener('scroll', this.windowScroll);
-    window.removeEventListener('gatsby::routeUpdate', this.listenerHandler);
+    window.removeEventListener('gatsby::routeUpdate', this.routeUpdate);
   }
 
   mobileNavToggleClick(e) {
@@ -37,7 +37,7 @@ export default class Header extends React.Component {
       mobileNavActive: !previousState.mobileNavActive,
     }));
   }
-  listenerHandler() {
+  routeUpdate() {
     this.setState({ mobileNavActive: false });
   }
   windowScroll(e) {
