@@ -94,7 +94,7 @@ $baseZindex: 2000;
   }
 }
 
-@media (min-width: 992px) {
+@include media-breakpoint-up(lg) {
   .nav-menu-container {
     height: 25px;
     > ul {
@@ -165,7 +165,7 @@ $baseZindex: 2000;
 
 /* Mobile Nav Toggle */
 .mobile-nav-toggle {
-  @media (max-width: 991px) {
+  @include media-breakpoint-down(md) {
     display: inline;
   }
 
@@ -187,7 +187,7 @@ $baseZindex: 2000;
   }
 }
 
-@media (max-width: 991px) {
+@include media-breakpoint-down(md) {
   .nav-menu-container {
     position: fixed;
     top: 0;
