@@ -57,7 +57,7 @@ export default class MapPage extends React.Component {
     const position = { center: [47, 3], zoom: 5 };
 
     return (
-      <Layout containerStyle={{ padding: 0, display: 'flex', width: '100%' }}>
+      <Layout containerStyle={{ padding: 0 }}>
         {typeof window !== 'undefined' && (
           <Map style={{ display: 'flex', width: '100%' }} ref={c => (this.map = c)} {...position}>
             <LayersControl position="topright">

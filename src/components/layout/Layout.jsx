@@ -30,11 +30,13 @@ export default class Layout extends React.Component {
             content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
           />
         </Helmet>
-        <Header />
-        <div className={`container-fluid ${styles.layout}`} style={containerStyle}>
-          {children}
+        <div className={styles.layout}>
+          <Header />
+          <div className={`container-fluid ${styles.layoutBody}`} style={containerStyle}>
+            {children}
+          </div>
+          <Footer />
         </div>
-        <Footer />
       </>
     );
   }
