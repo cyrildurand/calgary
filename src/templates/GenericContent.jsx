@@ -41,7 +41,6 @@ export default class GenericContent extends React.Component {
         <div
           dangerouslySetInnerHTML={{
             __html: htmlDescription,
-            __html: htmlDescription,
           }}
         />
       </Layout>
