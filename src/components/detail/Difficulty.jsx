@@ -1,6 +1,6 @@
+// @flow
 import { StaticQuery, graphql } from 'gatsby';
 import Modal from 'react-modal';
-import PropTypes from 'prop-types';
 import React from 'react';
 import Icon, { ICONS } from '../common/Icon';
 import styles from './Difficulty.module.scss';
@@ -9,29 +9,21 @@ Modal.setAppElement('#___gatsby');
 Modal.defaultStyles.overlay.zIndex = 10000;
 Modal.defaultStyles.content.maxHeight = '100vh';
 
-export default class Difficulty extends React.Component {
-  static propTypes = {
-    values: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        value: PropTypes.number.isRequired,
-      })
-    ),
+type Props = {
+  +values: Array<{
+    +name: string,
+    +value: number,
+  }>,
+};
+type State = {
+  +value: string,
+  +modalIsOpen: boolean,
+};
+export default class Difficulty extends React.Component<Props, State> {
+  state = {
+    value: 'F',
+    modalIsOpen: false,
   };
-
-  static defaultProps = {
-    values: [],
-  };
-
-  constructor(props) {
-    super(props);
-    this.state = { value: 'F', modalIsOpen: false };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-  }
 
   closeModal() {
     this.setState({ modalIsOpen: false });
@@ -39,11 +31,11 @@ export default class Difficulty extends React.Component {
   openModal() {
     this.setState({ modalIsOpen: true });
   }
-  handleChange(event) {
-    this.setState({ value: event.target.value });
+  handleChange(event: SyntheticEvent<HTMLInputElement>) {
+    this.setState({ value: event.currentTarget.value });
   }
 
-  handleSubmit(event) {
+  handleSubmit(event: SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
     this.closeModal();
 

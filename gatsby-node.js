@@ -1,3 +1,4 @@
+// @noflow
 const path = require('path');
 
 exports.onCreatePage = ({ page, actions }) => {

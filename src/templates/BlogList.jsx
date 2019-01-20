@@ -1,5 +1,5 @@
+// @flow
 import { graphql } from 'gatsby';
-import PropTypes from 'prop-types';
 import React from 'react';
 import Layout from '../components/layout/Layout';
 import Pagination from '../components/common/Pagination';
@@ -29,32 +29,29 @@ export const query = graphql`
   }
 `;
 
-export default class BlogList extends React.Component {
-  static propTypes = {
-    pageContext: PropTypes.shape({
-      currentPageIndex: PropTypes.number.isRequired,
-      pageCount: PropTypes.number.isRequired,
-    }).isRequired,
-    data: PropTypes.shape({
-      allContentfulBlogPost: PropTypes.shape({
-        edges: PropTypes.arrayOf(
-          PropTypes.shape({
-            node: PropTypes.shape({
-              id: PropTypes.string.isRequired,
-              title: PropTypes.string.isRequired,
-              content: PropTypes.shape({
-                childMarkdownRemark: PropTypes.shape({
-                  html: PropTypes.string.isRequired,
-                }),
-              }),
-              creationDate: PropTypes.string.isRequired,
-            }).isRequired,
-          }).isRequired
-        ).isRequired,
-      }).isRequired,
-    }).isRequired,
-  };
-
+type Props = {
+  +pageContext: {
+    +currentPageIndex: number,
+    +pageCount: number,
+  },
+  +data: {
+    +allContentfulBlogPost: {
+      +edges: Array<{
+        +node: {
+          +id: string,
+          +title: string,
+          +content: {
+            +childMarkdownRemark: {
+              +html: string,
+            },
+          },
+          +creationDate: string,
+        },
+      }>,
+    },
+  },
+};
+export default class BlogList extends React.Component<Props> {
   render() {
     const { currentPageIndex, pageCount } = this.props.pageContext;
     const blogPosts = this.props.data.allContentfulBlogPost.edges;

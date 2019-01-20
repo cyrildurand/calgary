@@ -1,5 +1,5 @@
+// @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 import Layout from '../components/layout/Layout';
 
@@ -15,18 +15,19 @@ export const query = graphql`
   }
 `;
 
-export default class GenericContent extends React.Component {
-  static propTypes = {
-    data: PropTypes.shape({
-      contentfulPage: PropTypes.shape({
-        content: PropTypes.shape({
-          childMarkdownRemark: PropTypes.shape({
-            html: PropTypes.string.isRequired,
-          }).isRequired,
-        }).isRequired,
-      }).isRequired,
-    }).isRequired,
-  };
+type Props = {
+  +data: {
+    +contentfulPage: {
+      +content: {
+        +childMarkdownRemark: {
+          +html: string,
+        },
+      },
+    },
+  },
+};
+
+export default class GenericContent extends React.Component<Props> {
   render() {
     const {
       contentfulPage: {

@@ -1,26 +1,28 @@
+// @flow
 import { Link, StaticQuery, graphql } from 'gatsby';
 import React from 'react';
 import Icon, { ICONS } from '../common/Icon';
 import MenuItem from './MenuItem';
 import styles from './Header.module.scss';
 
-export default class Header extends React.Component {
-  constructor() {
-    super();
-    this.windowScroll = this.windowScroll.bind(this);
-    this.routeUpdate = this.routeUpdate.bind(this);
-
-    this.state = {
-      headerScrolled: false,
-      mobileNavActive: false,
-    };
-  }
+type State = {
+  +headerScrolled: boolean,
+  +mobileNavActive: boolean,
+};
+export default class Header extends React.Component<{}, State> {
+  state = {
+    headerScrolled: false,
+    mobileNavActive: false,
+  };
 
   componentDidMount() {
     window.addEventListener('scroll', this.windowScroll);
     window.addEventListener('gatsby::routeUpdate', this.routeUpdate);
   }
-  componentDidUpdate(prevProps) {
+  componentDidUpdate() {
+    if (!document.body) {
+      return;
+    }
     if (this.state.mobileNavActive) {
       document.body.classList.add(styles.mobileNavActive);
     } else {
@@ -32,20 +34,21 @@ export default class Header extends React.Component {
     window.removeEventListener('gatsby::routeUpdate', this.routeUpdate);
   }
 
-  mobileNavToggleClick(e) {
-    this.setState(previousState => ({
-      mobileNavActive: !previousState.mobileNavActive,
-    }));
-  }
-  routeUpdate() {
+  routeUpdate = () => {
     this.setState({ mobileNavActive: false });
-  }
-  windowScroll(e) {
+  };
+  windowScroll = () => {
     if (window.pageYOffset > 100) {
       this.setState({ headerScrolled: true });
     } else {
       this.setState({ headerScrolled: false });
     }
+  };
+
+  mobileNavToggleClick() {
+    this.setState(previousState => ({
+      mobileNavActive: !previousState.mobileNavActive,
+    }));
   }
 
   render() {

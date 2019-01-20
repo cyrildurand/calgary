@@ -1,18 +1,18 @@
-import PropTypes from 'prop-types';
+// @flow
 import React from 'react';
+import type { Node } from 'react';
 import styles from './Section.module.scss';
 
-export default class Section extends React.Component {
-  static propTypes = {
-    name: PropTypes.oneOfType([PropTypes.node, PropTypes.string]).isRequired,
-    children: PropTypes.node.isRequired,
-  };
-
+type Props = {
+  +name: string | Node,
+  +children: Node,
+};
+export default class Section extends React.Component<Props> {
   render() {
     const { children, name } = this.props;
     return (
       <section className={styles.sectionTopBorder}>
-        <h3 className="d-flex mb-3">{name}</h3>
+        <h2 className="d-flex mb-3">{name}</h2>
         <div className="mb-3">{children}</div>
       </section>
     );

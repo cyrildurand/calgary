@@ -1,3 +1,4 @@
+// @noflow
 require('dotenv').config();
 
 let contentfulConfig = {
@@ -58,6 +59,7 @@ var config = {
       },
     },
     'gatsby-plugin-react-helmet',
+    'gatsby-plugin-flow',
   ],
 };
 

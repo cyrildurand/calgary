@@ -1,6 +1,6 @@
+// @flow
 import { graphql } from 'gatsby';
 import React from 'react';
-import PropTypes from 'prop-types';
 import AdditionalInformation from '../components/detail/AdditionalInformation';
 import Description from '../components/detail/Description';
 import Difficulty from '../components/detail/Difficulty';
@@ -36,66 +36,98 @@ export const query = graphql`
   }
 `;
 
-export default class Detail extends React.Component {
-  static propTypes = {
-    data: PropTypes.shape({
-      contentfulViaFerrata: PropTypes.object.isRequired,
-    }).isRequired,
-  };
+type Props = {
+  +data: {
+    +contentfulViaFerrata: {
+      +name: string,
+      +description: {
+        +childMarkdownRemark: {
+          +html: string,
+        },
+      },
+      +location: {
+        +lat: number,
+        +lon: number,
+      },
+      +images: Array<{
+        +title: string,
+        +description?: string,
+        +original: { +src: string, +aspectRatio: number },
+        +thumbnail: { +src: string, +aspectRatio: number },
+      }>,
+    },
+  },
+};
 
-  constructor() {
-    super();
-  }
-
+export default class Detail extends React.Component<Props> {
   render() {
     const viaFerrata = this.props.data.contentfulViaFerrata;
 
     return (
       <Layout>
-        <div className="row" itemScope itemType="http://schema.org/Place">
-          <div className="col-md-8">
-            <Section name={<span itemProp="name">{viaFerrata.name}</span>}>
-              <Description
-                htmlDescription={
-                  viaFerrata.description
-                    ? viaFerrata.description.childMarkdownRemark.html
-                    : undefined
-                }
-              />
-            </Section>
-            <Section name="Details">
-              <AdditionalInformation />
-            </Section>
-            <Section name="Location">
-              <Location
-                address={{
-                  street: '345 clos du lapin blanc',
-                  city: 'Bonnaison',
-                  postalCode: '73430',
-                }}
-                latitude={viaFerrata.location.lat}
-                longitude={viaFerrata.location.lon}
-                accessDescription="Monter vers les Orres. Dans une grande épingle, prendre la route à droite vers le parking Riou Sec. Monter et prendre le sentier forestier. Au panneau suivre le sentier à droite qui traverse le vallon jusqu’à la via."
-              />
-            </Section>
+        <div itemScope itemType="http://schema.org/Place">
+          <h1 itemProp="name">{viaFerrata.name}</h1>
+          <div className="row">
+            <main className="col-md-8 col-xl-9">
+              {viaFerrata.description && (
+                <Section name="Description">
+                  <Description htmlDescription={viaFerrata.description.childMarkdownRemark.html} />
+                </Section>
+              )}
+              <Section name="Details">
+                <AdditionalInformation
+                  difficulty="F"
+                  duration={{
+                    roundTrip: '45min',
+                    endToParking: '1h',
+                    climbing: '1h',
+                    parkingToStart: '1h',
+                  }}
+                  price={0}
+                  altitude={{
+                    start: 1200,
+                    end: 1600,
+                  }}
+                  year={2008}
+                  contact={{
+                    name: 'Maison du Tourisme du Champsaur & Valgaudemar',
+                    tel: '04 92 49 09 35',
+                    website:
+                      'http://www.champsaur-valgaudemar.com/fr/ete/loisirs-activites/canyoning-via-ferrata.html',
+                  }}
+                />
+              </Section>
+              <Section name="Accès">
+                <Location
+                  address={{
+                    street: '345 clos du lapin blanc',
+                    city: 'Bonnaison',
+                    postalCode: '73430',
+                  }}
+                  latitude={viaFerrata.location.lat}
+                  longitude={viaFerrata.location.lon}
+                  accessDescription="Monter vers les Orres. Dans une grande épingle, prendre la route à droite vers le parking Riou Sec. Monter et prendre le sentier forestier. Au panneau suivre le sentier à droite qui traverse le vallon jusqu’à la via."
+                />
+              </Section>
+            </main>
+            <aside className="col-md-4 col-xl-3">
+              <Section name="Images">
+                <Gallery images={viaFerrata.images || []} />
+              </Section>
+              <Section name="Difficulty">
+                <Difficulty
+                  values={[
+                    { name: 'F', value: 7 },
+                    { name: 'PD', value: 13 },
+                    { name: 'AD', value: 88 },
+                    { name: 'D', value: 9 },
+                    { name: 'TD', value: 1 },
+                    { name: 'ED', value: 0 },
+                  ]}
+                />
+              </Section>
+            </aside>
           </div>
-          <aside className="col-md-4">
-            <Section name="Difficulty">
-              <Difficulty
-                values={[
-                  { name: 'F', value: 7 },
-                  { name: 'PD', value: 13 },
-                  { name: 'AD', value: 88 },
-                  { name: 'D', value: 9 },
-                  { name: 'TD', value: 1 },
-                  { name: 'ED', value: 0 },
-                ]}
-              />
-            </Section>
-            <Section name="Images">
-              <Gallery images={viaFerrata.images || undefined} />
-            </Section>
-          </aside>
         </div>
       </Layout>
     );

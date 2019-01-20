@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types';
+// @flow
 import React from 'react';
 
-export default class Description extends React.Component {
-  static propTypes = {
-    htmlDescription: PropTypes.string,
-  };
+type Props = {
+  +htmlDescription: string,
+};
 
+export default class Description extends React.Component<Props> {
   static defaultProps = {
     htmlDescription: '<p>No description yet</p>',
   };

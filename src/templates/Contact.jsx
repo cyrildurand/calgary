@@ -1,15 +1,15 @@
+// @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import Layout from '../components/layout/Layout';
 import styles from './Contact.module.scss';
 
-export default class Contact extends React.Component {
-  static propTypes = {
-    pageContext: PropTypes.shape({
-      success: PropTypes.bool,
-    }).isRequired,
-  };
+type Props = {
+  +pageContext: {
+    +success: boolean,
+  },
+};
 
+export default class Contact extends React.Component<Props> {
   renderForm() {
     return (
       <form

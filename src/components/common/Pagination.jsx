@@ -1,17 +1,17 @@
+// @flow
 import { Link } from 'gatsby';
-import PropTypes from 'prop-types';
 import React from 'react';
 import Icon, { ICONS } from './Icon';
 import styles from './Pagination.module.scss';
 
-export default class Pagination extends React.Component {
-  static propTypes = {
-    currentPageIndex: PropTypes.number.isRequired,
-    pageCount: PropTypes.number.isRequired,
-    pageLinkBuilder: PropTypes.func.isRequired,
-  };
+type Props = {
+  +currentPageIndex: number,
+  +pageCount: number,
+  +pageLinkBuilder: (i: number) => string,
+};
 
-  getPageElement(pageIndex) {
+export default class Pagination extends React.Component<Props> {
+  getPageElement(pageIndex: number) {
     const { currentPageIndex, pageLinkBuilder } = this.props;
 
     const getClassName = () => {
@@ -34,7 +34,7 @@ export default class Pagination extends React.Component {
       </li>
     );
   }
-  getBreakElement(pageIndex) {
+  getBreakElement(pageIndex: number) {
     return (
       <li key={pageIndex} className="d-none d-md-block">
         <span>...</span>

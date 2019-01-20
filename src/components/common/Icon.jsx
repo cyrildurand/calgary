@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+// @flow
 import React from 'react';
 
 /**
@@ -8,20 +8,19 @@ import React from 'react';
  * <Icon icon={ICONS.CLOSE} />
  */
 
-export default class Icon extends React.Component {
-  static propTypes = {
-    icon: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.shape({
-        viewBox: PropTypes.string,
-        paths: PropTypes.arrayOf(PropTypes.string).isRequired,
-      }),
-    ]).isRequired,
-    width: PropTypes.number,
-    height: PropTypes.number,
-    color: PropTypes.string,
-  };
-
+type Props = {
+  // eslint-disable-next-line flowtype/space-after-type-colon
+  +icon:
+    | string
+    | {
+        +viewBox: string,
+        +paths: string[],
+      },
+  +width: number,
+  +height: number,
+  +color: string,
+};
+export default class Icon extends React.Component<Props> {
   static defaultProps = {
     width: 24,
     height: 24,

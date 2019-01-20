@@ -1,10 +1,19 @@
+// @flow
 import L from 'leaflet';
 import 'leaflet-fullscreen';
 import { withLeaflet, MapControl } from 'react-leaflet';
+import type { MapControlProps } from 'react-leaflet';
 import '../../../node_modules/leaflet-fullscreen/dist/leaflet.fullscreen.css';
 
-class FullScreenControl extends MapControl {
-  createLeafletElement(props) {
+type Props = MapControlProps & {
+  +leaflet: {
+    +map: {},
+  },
+  +options?: {},
+};
+
+class FullScreenControl extends MapControl<{}, Props> {
+  createLeafletElement(props: Props) {
     const {
       leaflet: { map },
       ...options

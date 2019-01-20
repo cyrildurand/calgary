@@ -1,24 +1,24 @@
+// @flow
 import '../../../node_modules/leaflet/dist/leaflet.css';
 import * as L from 'leaflet';
 import { LayersControl, Map, Marker, TileLayer } from 'react-leaflet';
-import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import Icon, { ICONS } from '../common/Icon';
 import FullScreenControl from '../map/FullScreenControl';
 
-export default class Location extends React.Component {
-  static propTypes = {
-    address: PropTypes.shape({
-      street: PropTypes.string,
-      postalCode: PropTypes.string.isRequired,
-      city: PropTypes.string.isRequired,
-    }).isRequired,
-    accessDescription: PropTypes.string.isRequired,
-    latitude: PropTypes.number.isRequired,
-    longitude: PropTypes.number.isRequired,
-  };
+type Props = {
+  +address: {
+    +street?: string,
+    +postalCode: string,
+    +city: string,
+  },
+  +accessDescription: string,
+  +latitude: number,
+  +longitude: number,
+};
 
+export default class Location extends React.Component<Props> {
   render() {
     const { address, accessDescription, latitude, longitude } = this.props;
 

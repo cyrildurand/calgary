@@ -1,18 +1,18 @@
+// @flow
 import '../../styles/main.scss';
 import Helmet from 'react-helmet';
-import PropTypes from 'prop-types';
 import React from 'react';
-import stylePropType from 'react-style-proptype';
+import type { Node } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import styles from './Layout.module.scss';
 
-export default class Layout extends React.Component {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    containerStyle: stylePropType,
-  };
+type Props = {
+  +children: Node,
+  +containerStyle?: {},
+};
 
+export default class Layout extends React.Component<Props> {
   static defaultProps = {
     containerStyle: {},
   };

@@ -1,16 +1,21 @@
 {
-  "plugins": ["react", "prettier"],
+  "plugins": ["react", "prettier", "flowtype"],
   "extends": [
     "airbnb",
     "prettier",
     "gatsby-standard",
     "eslint:recommended",
-    "plugin:react/recommended"
+    "plugin:react/recommended",
+    "plugin:flowtype/recommended"
   ],
   "rules": {
     "camelcase": "off",
     "react/destructuring-assignment": "off",
     "prettier/prettier": "error",
+
+    "react/require-default-props": "off",
+    "react/default-props-match-prop-types": "off",
+
     "jsx-a11y/label-has-associated-control": [
       2,
       {
@@ -19,12 +24,16 @@
         "controlComponents": ["input"]
       }
     ],
-    "jsx-a11y/label-has-for": "off"
+    "jsx-a11y/label-has-for": "off",
+    "flowtype/require-valid-file-annotation": [2, "always"]
   },
   "settings": {
     "import/resolver": {
       "node": {
         "extensions": [".js", ".jsx"]
+      },
+      "flowtype": {
+        "onlyFilesWithFlowAnnotation": true
       }
     }
   }

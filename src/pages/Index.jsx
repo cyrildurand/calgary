@@ -1,9 +1,10 @@
+// @flow
 import { Link } from 'gatsby';
 import React from 'react';
 import Layout from '../components/layout/Layout';
 import styles from './Index.module.scss';
 
-export default class Index extends React.Component {
+export default class Index extends React.Component<{}> {
   render() {
     return (
       <Layout>

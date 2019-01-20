@@ -1,5 +1,5 @@
+// @flow
 import * as L from 'leaflet';
-import PropTypes from 'prop-types';
 import React from 'react';
 import { Link, graphql } from 'gatsby';
 import ReactDOMServer from 'react-dom/server';
@@ -27,30 +27,32 @@ export const query = graphql`
   }
 `;
 
-export default class MapPage extends React.Component {
-  static propTypes = {
-    data: PropTypes.shape({
-      allContentfulViaFerrata: PropTypes.shape({
-        edges: PropTypes.arrayOf(
-          PropTypes.shape({
-            node: PropTypes.shape({
-              id: PropTypes.string.isRequired,
-              name: PropTypes.string.isRequired,
-              slug: PropTypes.string.isRequired,
-              location: PropTypes.shape({
-                latitude: PropTypes.number.isRequired,
-                longitude: PropTypes.number.isRequired,
-              }),
-            }),
-          })
-        ).isRequired,
-      }).isRequired,
-    }).isRequired,
+type Props = {
+  +data: {
+    +allContentfulViaFerrata: {
+      +edges: Array<{
+        +node: {
+          +id: string,
+          +name: string,
+          +slug: string,
+          +location: {
+            +latitude: number,
+            +longitude: number,
+          },
+        },
+      }>,
+    },
+  },
+};
+export default class MapPage extends React.Component<Props> {
+  onFeatureGroupAdd = (e: { target: L.FeatureGroup }) => {
+    if (this.map) {
+      this.map.leafletElement.fitBounds(e.target.getBounds());
+    }
   };
 
-  onFeatureGroupAdd = e => {
-    this.map.leafletElement.fitBounds(e.target.getBounds());
-  };
+  map: ?Map;
+
   render() {
     const vias = this.props.data.allContentfulViaFerrata.edges;
     //center will be recomputed by onFeatureGroupAdd
