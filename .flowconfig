@@ -1,4 +1,8 @@
 [ignore]
+    ./public/.*
+    ./node_modules/.*
+    ./.cache/.*
+
 
 [include]
      ./src/
