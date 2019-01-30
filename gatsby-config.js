@@ -60,6 +60,13 @@ var config = {
     },
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-flow',
+    {
+      resolve: 'gatsby-plugin-nprogress',
+      options: {
+        color: '#6b37bf',
+        showSpinner: true,
+      },
+    },
   ],
 };
 
