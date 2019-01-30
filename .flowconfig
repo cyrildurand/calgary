@@ -1,11 +1,8 @@
 [ignore]
-    ./public/.*
-    ./node_modules/.*
-    ./.cache/.*
-
+    <PROJECT_ROOT>/public/.*
+    <PROJECT_ROOT>/.cache/.*
 
 [include]
-     ./src/
     
 [libs]
 
