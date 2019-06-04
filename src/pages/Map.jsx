@@ -45,13 +45,13 @@ type Props = {
   },
 };
 export default class MapPage extends React.Component<Props> {
+  map: ?Map;
+
   onFeatureGroupAdd = (e: { target: L.FeatureGroup }) => {
     if (this.map) {
       this.map.leafletElement.fitBounds(e.target.getBounds());
     }
   };
-
-  map: ?Map;
 
   render() {
     const vias = this.props.data.allContentfulViaFerrata.edges;
