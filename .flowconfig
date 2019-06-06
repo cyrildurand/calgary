@@ -12,5 +12,6 @@
 [options]
     module.name_mapper.extension='css'-> 'empty/object'
     module.name_mapper.extension='scss'-> 'empty/object'
-
+    server.max_workers=4
+    
 [strict]
